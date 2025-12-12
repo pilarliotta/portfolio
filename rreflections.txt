@@ -1,0 +1,23 @@
+For this data portrait, I tracked every song I listened to for a week. I noticed that even though I listened to tons of music, I kept returning to the same three songs:
+
+Champagne Coast — 17 plays (art pop, r&b soul, indie pop)
+
+Simulation Swarm —13 plays (indie, folk, alternative)
+
+What You Like — 9 plays (electronic, house, dance)
+
+So instead of charting everything, I turned each one into a color mode you can switch using SPACE, kind of like my own Spotify visualizer? I kept the layout minimal and centered like Spotify's.. I wanted to make something that I could se in the app as an emotional waveform view.
+
+From class, I used:
+
+let variables to control animation speed, sound levels, and state
+
+for loops to draw multiple wave rows instead of repeating code manually
+
+constrain() to make sure the waves stayed inside the frame
+
+Interaction functions like mousePressed() and keyPressed() so the viewer can pause or swap moods
+
+Some other of the functions, I learned off youtube, I have really been invested in sound and how it interacts, in my Major Studio I did a project on Touch Designer and it kind of mirrors this one so, I've been really trying to familiarize myself with these different ways to play with soundwaves and sound.
+
+What I learned: When making this, I wanted to explore how sound and mood overlap. It was interesting to think about rhythm in a visual way rather than just as audio. I can see myself using this system in future projects to track emotions through movement instead of just numbers like traditional Spotify stats.
