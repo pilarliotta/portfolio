@@ -1,0 +1,6 @@
+The theme of my assigment was to go from a small meh annoyed face to a happy face, I wanted there to be a shift from color to color both in the background and the color of the little guys. I included a sketch that I based it on from Illustrator on here, called Sketch of Design. You can click on the screen, and also click the space key to shift from each different color and image. To change the color of the circle and the square, you simply need to click C. In comparison to the colors from the background and the shapes, I toggled with making the backgrounds random, and the shapes of the faces vibrant colors that are not random. But if you wanted to have random colors you can press R to randomize colors and the background.
+
+I used user defined variables sad, smile, morph, target, palIdx, bgColor, and palettes. I used random in randomizeBackground and randomizeColors with clear minimum and maximum values. I used mouseX and mouseY inside mousePressed to set the position, and I implemented both mousePressed and keyPressed for interaction. 
+
+Even if my design principle was quite simple. This assignment was a lot of fun and I had a fun time trying to figure out how to toggle from one feature to the other, that I wanted to accomplish. 
+

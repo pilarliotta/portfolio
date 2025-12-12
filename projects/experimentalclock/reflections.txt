@@ -1,0 +1,11 @@
+Description of my experimental clock -
+
+My experimental clock fills the whole screen with the current time written over and over in Pixelify Sans. Up close you can read the numbers clearly but from far away they blend into squiggles and texture. It ends up looking more like a pattern than a regular clock display. That makes time feel like it’s all around you instead of just sitting in one spot. I also added a hover effect so when you move your mouse over the text it changes color. In my code you can press T to switch between 12 and 24 hour time, Q or W to make the font smaller or bigger, and C to switch color palettes. It lets people play around with how time looks and feels.
+
+
+Design process and sketches-
+
+At first I had three ideas. One was a drifting number clock with glitch effects, another was a shape clock where circles slowly grow or shrink to show seconds minutes and hours, and the last one was a tiled military-style digital clock using a pixel font. I kinda wanted to change it up from my last project because I already included a circle and a triangle before and I wanted to do something more text heavy this time. That’s why I chose the tiled digital idea. My version does not have a traditional clock face with hands, it’s just the time repeated across the screen to make a whole environment out of it. From there I worked on the grid spacing, hover interaction, and color palettes to make it more fun to use.
+
+Overall reflection and what I learned -
+Working on this clock taught me how to turn a simple digital readout into a whole environment. I figured out how to build a grid in p5.js, use custom fonts, and make hover effects. Adding the keyPressed() controls showed me how easy it is to make the clock interactive. It also made me think about how time can change depending on where you stand or how you interact with it. This assignment showed me that a basic idea like a clock can become something totally different and creative when you play with it.

@@ -1,0 +1,14 @@
+Name: Pilar Liotta
+Partner: Jia
+
+Language my partner used to describe the image:
+On my walk to school from the subway during high-school, I would walk along St. Felix St between Hanson Pl and Lafayette Ave. Across from the Brooklyn Music School was a row of classic Brooklyn townhouses. They were mostly three or two story tall, with elevated basements and moldings on the very top. They all had cast-iron fences leading to tall, ornamented double doors, and windows along the street would be dotted with air conditioners. They were all a variety of color of a light mocha brown, ochre, and burgundy. Some of them had brick textures coming through, whereas some had a smooth texture. In the morning autumn sun, which is how I always remember that street as I head to first period health class, the rays of light basked the entire street, giving the houses an orange tint.
+
+My interpretation of the image:
+I pictured a row of four brownstone-style houses in multiple colors with tall stoops, windows, and a sun shining down.
+
+Depiction of the image using code:
+I used p5.js 2D primitives such as rect(), ellipse(), fill(), text() for emojis, and blendMode() for shadows. I used translate(), push(), and pop() to position each house, the stairs, and the moving cars.
+
+Differences in interpretation at all stages of the assignment:
+I simplified the block to four houses and replaced cast-iron fences with stairs. I used a sun emoji instead of hand-coded rays,  and I added a couple of trees, leaves to make it seem fall was coming and moving cars to make the street more lively.
