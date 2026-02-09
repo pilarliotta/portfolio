@@ -584,7 +584,8 @@ body.sidebar-collapsed .project-detail-header p {
 
 .hero-title {
   font-family: 'Averia Serif Libre', 'StackSansNotch-VariableFont_wght', 'Anisette Std', serif;
-  font-size: clamp(3rem, 8vw, 7rem);
+  /* Match About/Contact header style for consistency */
+  font-size: 4rem;
   font-weight: 900;
   line-height: 1;
   text-transform: uppercase;
@@ -1075,6 +1076,8 @@ body.sidebar-collapsed .project-detail-header p {
 
 /* Hide divider when in full-screen (sidebar collapsed) */
 body.sidebar-collapsed .content-area::before { display: none; }
+/* Hide divider in Work/hero and About/Contact views for a cleaner header */
+body.work-active .content-area::before { display: none; }
 
 /* Full-screen toggle button inside each project header */
 .project-fullscreen-toggle {
