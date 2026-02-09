@@ -14,6 +14,17 @@
 <link rel="stylesheet" href="projects/colorball/colorballstyle.css">
 
 <title>Pilar Liotta</title>
+<!-- Favicons (primary: your logo; fallback: star) -->
+<link rel="icon" type="image/svg+xml" href="logopilar.svg">
+<link rel="shortcut icon" href="logopilar.svg" type="image/svg+xml">
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+<!-- Safari pinned tab (uses a monochrome SVG) -->
+<link rel="mask-icon" href="logopilar.svg" color="#000000">
+<!-- Optional PNG/apple-touch fallbacks if you add them later:
+<link rel="icon" sizes="32x32" type="image/png" href="assets/icons/logopilar-32.png">
+<link rel="icon" sizes="16x16" type="image/png" href="assets/icons/logopilar-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/logopilar-180.png"> -->
+<meta name="theme-color" content="#000000">
 <style>
 @font-face {
   font-family: 'Anisette Std';
@@ -571,6 +582,12 @@ body.sidebar-collapsed .project-detail-header p {
   max-width: 600px;
 }
 
+/* Center the Work hero card and use a slightly wider max-width so the info block feels balanced */
+.work-active .project-hero { align-items: center; }
+.work-active .hero-content { margin: 0 auto; max-width: 820px; transform: none; }
+/* keep text left-aligned within the frosted card */
+.work-active .hero-meta { justify-content: flex-start; }
+
 .hero-label {
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -1076,6 +1093,11 @@ body.sidebar-collapsed .project-detail-header p {
 
 /* Hide divider when in full-screen (sidebar collapsed) */
 body.sidebar-collapsed .content-area::before { display: none; }
+/* When full screen, remove any accidental top gap above the active view */
+body.sidebar-collapsed .content-area { padding-top: 0 !important; }
+body.sidebar-collapsed .content-area > * { margin-top: 0 !important; }
+body.sidebar-collapsed .project-detail.active { margin-top: 0 !important; }
+body.sidebar-collapsed .project-detail.active .project-detail-header { margin-top: 0 !important; }
 /* Hide divider in Work/hero and About/Contact views for a cleaner header */
 body.work-active .content-area::before { display: none; }
 
@@ -1131,11 +1153,15 @@ body.work-active .content-area::before { display: none; }
 @media (max-width: 768px) {
   .project-hero {
     padding: 2rem;
+    /* Mobile UX: show the hero info immediately at the top */
+    justify-content: flex-start;
   }
   
   .hero-title {
     font-size: 3rem;
   }
+  /* Slight top margin for breathing room under the status bar */
+  .work-active .hero-content { transform: none; margin-top: 0.5rem; }
   
   .project-detail-header {
     padding: 2rem;
