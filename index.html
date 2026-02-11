@@ -1064,7 +1064,9 @@ body.sidebar-collapsed .project-detail-header p {
 /* Neon send button for contact form */
 .btn-send {
   appearance: none;
-  display: inline-flex;
+  display: block; /* Change to block-level to allow margin: auto for centering */
+  margin: 0 auto; /* Center the block element */
+  max-width: fit-content; /* Prevent it from stretching across the container */
   align-items: center;
   justify-content: center;
   padding: 10px 16px;
