@@ -178,7 +178,12 @@ a, button, input, textarea, select, .project-item, .project-list, .project-previ
 }
 
 /* Ensure touch gestures aren't blocked globally */
-.html, html, body { height: 100%; touch-action: auto; }
+.html, html, body {
+  height: 100%;
+  touch-action: auto;
+  margin: 0;
+  overflow-x: hidden; /* prevent horizontal drift that creates a left-side white gap */
+}
 
 .container {
   display: block; /* switch to a single-page flow; sidebar is positioned separately */
