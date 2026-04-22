@@ -559,7 +559,6 @@ body.sidebar-collapsed .project-detail-header p {
   min-height: 100vh;
   /* make the content flow in the document so the page uses a single body scrollbar */
   margin-left: var(--sidebar-width);
-  padding-left: 3rem; /* Added padding to prevent cutting on the left */
   overflow: visible;
   position: relative;
   transition: margin-left 320ms ease;
@@ -575,6 +574,7 @@ body.sidebar-collapsed .project-detail-header p {
 
 .hero-content {
   max-width: 600px;
+  padding-left: 2rem; /* Breathing room from sidebar */
 }
 
 /* Center the Work hero card and use a slightly wider max-width so the info block feels balanced */
@@ -761,6 +761,7 @@ body.sidebar-collapsed .project-detail-header p {
 
 .project-detail-header {
   padding: 4rem;
+  padding-left: 6rem; /* Extra padding to align with hero content */
   margin-bottom: 0;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   background: var(--card-bg);
@@ -814,6 +815,7 @@ body.sidebar-collapsed .project-detail-header p {
 
 .project-content {
   padding: 4rem;
+  padding-left: 6rem; /* Extra padding to align with header */
 }
 
 .project-image-full {
@@ -1157,23 +1159,32 @@ body.work-active .content-area::before { display: none; }
     /* Mobile UX: show the hero info immediately at the top */
     justify-content: flex-start;
   }
+
+  .hero-content {
+    padding-left: 0;
+    width: 100%;
+    max-width: none;
+  }
   
   .hero-title {
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 10vw, 3rem);
+    white-space: normal;
   }
   /* Slight top margin for breathing room under the status bar */
   .work-active .hero-content { transform: none; margin-top: 0.5rem; }
   
   .project-detail-header {
     padding: 2rem;
+    padding-left: 1.5rem;
   }
   
   .project-detail h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
   
   .project-content {
-    padding: 2rem;
+    padding: 1.5rem;
+    padding-left: 1.5rem;
   }
   
   .project-item {
@@ -2013,18 +2024,18 @@ body.lightbox-open { overflow: hidden; }
       <div class="project-list">
         <!-- SCAD Work (4 projects) -->
         <div class="project-section">
-          <div class="section-title">SCAD / Work Gallery</div>
+          <div class="section-title">SCAD / Mixed Gallery</div>
 
           <!-- Graphic Design quick gallery (not a case study) -->
           <div class="project-item" data-project="graphicdesign" data-color="pink">
             <div class="project-number">02</div>
-            <div class="project-name">Work Gallery</div>
+            <div class="project-name">Mixed Gallery</div>
             <div class="project-tags">Mockups · SCAD</div>
             <div class="project-preview">
-              <img src="projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg" alt="Work Gallery Preview">
+              <img src="projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg" alt="Mixed Gallery Preview">
               <div class="project-preview-info">
-                <div class="preview-tag">Work Gallery · SCAD</div>
-                <div class="preview-title">Work Gallery</div>
+                <div class="preview-tag">Mixed Gallery · SCAD</div>
+                <div class="preview-title">Mixed Gallery</div>
               </div>
             </div>
           </div>
@@ -2879,7 +2890,7 @@ body.lightbox-open { overflow: hidden; }
           <div class="project-meta-row">
             <div class="meta-item">
                 <div class="meta-label">Category</div>
-                <div class="meta-value">Work Gallery</div>
+                <div class="meta-value">Mixed Gallery</div>
               </div>
             <div class="meta-item">
               <div class="meta-label">Year</div>
@@ -2890,7 +2901,7 @@ body.lightbox-open { overflow: hidden; }
               <div class="meta-value">Design, Mockups</div>
             </div>
           </div>
-          <h1>SCAD Work Gallery</h1>
+          <h1>SCAD Mixed Gallery</h1>
           <p>A design-forward gallery focused on graphic design craft: identities and brand systems, storytelling strategy, UX/UI explorations, and packaging studies. From concept to execution, it showcases how visual systems communicate clearly and beautifully across formats. Click any image to enlarge.</p>
         </div>
 
@@ -4130,7 +4141,7 @@ body.lightbox-open { overflow: hidden; }
           <div class="project-meta-row">
             <div class="meta-item">
                 <div class="meta-label">Category</div>
-                <div class="meta-value">Work Gallery</div>
+                <div class="meta-value">Mixed Gallery</div>
               </div>
             <div class="meta-item">
               <div class="meta-label">Year</div>
@@ -4141,7 +4152,7 @@ body.lightbox-open { overflow: hidden; }
               <div class="meta-value">Design, Mockups</div>
             </div>
           </div>
-          <h1>Work Gallery</h1>
+          <h1>Mixed Gallery</h1>
           <p>A curated collection of mockups, posters, packaging studies, and quick experiments from SCAD. Click any image to enlarge.</p>
         </div>
 
@@ -5154,7 +5165,7 @@ body.lightbox-open { overflow: hidden; }
           <div class="project-meta-row">
             <div class="meta-item">
                 <div class="meta-label">Category</div>
-                <div class="meta-value">Work Gallery</div>
+                <div class="meta-value">Mixed Gallery</div>
               </div>
             <div class="meta-item">
               <div class="meta-label">Year</div>
@@ -5165,7 +5176,7 @@ body.lightbox-open { overflow: hidden; }
               <div class="meta-value">Design, Mockups</div>
             </div>
           </div>
-          <h1>Work Gallery</h1>
+          <h1>Mixed Gallery</h1>
           <p>A curated collection of mockups, posters, packaging studies, and quick experiments from SCAD. Click any image to enlarge.</p>
         </div>
 
