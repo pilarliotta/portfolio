@@ -38,6 +38,18 @@ body {
 }
 .cursor svg { width: 22px; height: 22px; display: block; transition: transform 0.15s; }
 .cursor.big svg { transform: scale(1.8); }
+.cursor.plus::before {
+  content: '+';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: #000;
+  z-index: 2;
+}
+.cursor.plus svg { transform: scale(2.2); }
 .cursor::after {
   content: '';
   position: absolute;
@@ -584,9 +596,13 @@ footer {
 .overlay-grid-item:first-child { grid-column: 1 / 3; aspect-ratio: 16/9; }
 .overlay-grid-item img, .overlay-grid-item video {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.3s;
 }
-.overlay-grid-item:hover img, .overlay-grid-item:hover video { transform: scale(1.04); }
+.overlay-grid-item:hover img, .overlay-grid-item:hover video,
+.overlay-hero-img:hover img, .overlay-hero-img:hover video { 
+  transform: scale(1.04); 
+  filter: brightness(1.05);
+}
 .overlay-grid-item span {
   position: absolute;
   bottom: 12px; left: 14px;
@@ -668,6 +684,42 @@ footer {
   .overlay-reflection { grid-template-columns: 1fr; gap: 32px; padding: 40px 24px; }
   .overlay-gallery { padding: 40px 24px; }
 }
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  cursor: zoom-out;
+}
+.lightbox.open { display: flex; }
+.lightbox img, .lightbox video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.1);
+  cursor: default;
+}
+.lightbox-close {
+  position: absolute;
+  top: 32px; right: 32px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  background: none; border: none;
+}
+.lightbox-close:hover { opacity: 1; }
 </style>
 </head>
 <body>
@@ -676,6 +728,11 @@ footer {
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" vector-effect="non-scaling-stroke"/>
   </svg>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close">Close</button>
+  <div id="lightbox-content" style="display:contents;"></div>
 </div>
 
 <nav>
@@ -884,9 +941,9 @@ footer {
       <div class="project-card-info"><div class="project-card-label">Experimental Book · 2025</div><div class="project-card-name">Baskerville</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('touchdesigner')">
-      <div class="project-card-bg" style="background-image:url('projects/touchdesigner/touchdesignerimage.png');"></div>
-      <div class="project-card-overlay"></div>
-      <div class="project-card-info"><div class="project-card-label">Interactive · Generative · 2025</div><div class="project-card-name">TouchDesigner</div></div>
+      <video autoplay muted loop playsinline src="projects/touchdesigner/touchdesigner-web.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"></video>
+      <div class="project-card-overlay" style="z-index:1;"></div>
+      <div class="project-card-info" style="z-index:2;"><div class="project-card-label">Interactive · Generative · 2025</div><div class="project-card-name">TouchDesigner</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('opticalillusion')">
       <div class="project-card-bg" style="background-image:url('projects/opticalillusion/opticalillusion.jpg');"></div>
@@ -1220,6 +1277,18 @@ footer {
       <div class="overlay-grid-item">
         <video src="projects/touchdesigner/ocean.mp4" autoplay muted loop playsinline></video>
         <span>Ocean</span>
+      </div>
+      <div class="overlay-grid-item">
+        <video src="projects/touchdesigner/project1.mp4" autoplay muted loop playsinline></video>
+        <span>Project 1</span>
+      </div>
+      <div class="overlay-grid-item">
+        <video src="projects/touchdesigner/Project2VideoClip.mp4" autoplay muted loop playsinline></video>
+        <span>Project 2</span>
+      </div>
+      <div class="overlay-grid-item">
+        <video src="projects/touchdesigner/Project3.mp4" autoplay muted loop playsinline></video>
+        <span>Project 3</span>
       </div>
     </div>
   </div>
@@ -1676,6 +1745,30 @@ footer {
       <div class="overlay-grid-item"><img src="projects/mixmedia/Photo_2025-02-15_163135.webp" alt=""></div>
       <div class="overlay-grid-item"><img src="projects/mixmedia/Photo_2025-02-15_163352.webp" alt=""></div>
       <div class="overlay-grid-item"><img src="projects/mixmedia/Photo_2025-02-15_163545.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/Photo_2025-02-15_163645.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_011224-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_011225-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_011225.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_021424.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_022423-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_032623-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_041222.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_041522.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_043024.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_051423-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_051423.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_052923.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_061722-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_070523.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_080124.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_090522.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_092523.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_101824.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_111023.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_121624.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_121723-4.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_121723-5.webp" alt=""></div>
+      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_121723.webp" alt=""></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1906,8 +1999,58 @@ document.addEventListener('keydown', e => {
       o.classList.remove('open');
       document.body.style.overflow = '';
     });
+    // Also close lightbox on Escape
+    closeLightbox();
   }
 });
+
+// Lightbox logic
+const lb = document.getElementById('lightbox');
+const lbContent = document.getElementById('lightbox-content');
+
+function openLightbox(src, isVideo) {
+  lbContent.innerHTML = isVideo 
+    ? `<video src="${src}" autoplay muted loop playsinline controls></video>`
+    : `<img src="${src}" alt="Enlarged view">`;
+  lb.classList.add('open');
+}
+
+function closeLightbox() {
+  lb.classList.remove('open');
+  lbContent.innerHTML = '';
+}
+
+lb.addEventListener('click', (e) => {
+  if (e.target === lb || e.target.classList.contains('lightbox-close')) {
+    closeLightbox();
+  }
+});
+
+// Attach listeners to all images/videos in project overlays
+function initLightboxListeners() {
+  document.querySelectorAll('.project-overlay img, .project-overlay video').forEach(el => {
+    // Skip if it's already got a listener or is the lightbox content itself
+    if (el.closest('#lightbox')) return;
+    
+    el.style.cursor = 'zoom-in';
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const src = el.tagName === 'VIDEO' ? el.querySelector('source')?.src || el.src : el.src;
+      openLightbox(src, el.tagName === 'VIDEO');
+    });
+    
+    // Cursor effect
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('big', 'plus');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('big', 'plus');
+    });
+  });
+}
+
+// Initialize on load
+initLightboxListeners();
 </script>
 </body>
 </html>
