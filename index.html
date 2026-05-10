@@ -2178,12 +2178,19 @@ function openOverlay(id) {
   o.classList.add('open');
   o.scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  history.replaceState(null, '', '#' + id);
 }
 function closeOverlay(id) {
   const o = document.getElementById('overlay-' + id);
   if (!o) return;
   o.classList.remove('open');
   document.body.style.overflow = '';
+  history.replaceState(null, '', window.location.pathname);
+}
+
+// Deep link: open overlay from URL hash on load
+if (window.location.hash) {
+  openOverlay(window.location.hash.slice(1));
 }
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
