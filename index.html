@@ -617,6 +617,22 @@ footer {
   z-index: 1;
 }
 
+/* Perception documentation slideshow */
+.pslide { position:absolute; inset:0; opacity:0; transition:opacity 0.45s ease; pointer-events:none; }
+.pslide.active { opacity:1; pointer-events:auto; }
+.pslide img { width:100%; height:100%; object-fit:contain; display:block; }
+.p-arrow {
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:rgba(10,15,26,0.7); border:1px solid rgba(255,255,255,0.15);
+  color:#fff; font-size:18px; width:40px; height:40px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; z-index:10; transition:background 0.2s;
+  font-family:var(--mono);
+}
+.p-arrow:hover { background:var(--accent); }
+.p-arrow.prev { left:12px; }
+.p-arrow.next { right:12px; }
+
 /* VSCO gallery — show full images, 4 columns, no crop */
 #overlay-vsco .overlay-grid {
   grid-template-columns: repeat(4, 1fr);
@@ -1364,17 +1380,40 @@ footer {
     </div>
   </div>
   <div class="overlay-gallery">
-    <div class="overlay-gallery-title">Documentation — MIT Reality Hack 2026</div>
-    <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/perception/perception_documentation_Page_12.png" alt=""><span>Installation view</span></div>
-      <div class="overlay-grid-item"><img src="projects/perception/perception_documentation_Page_01.png" alt=""><span>Concept</span></div>
-      <div class="overlay-grid-item"><img src="projects/perception/perception_documentation_Page_05.png" alt=""><span>System</span></div>
-      <div class="overlay-grid-item"><img src="projects/perception/perception_documentation_Page_08.png" alt=""><span>Receipt output</span></div>
-      <div class="overlay-grid-item">
-        <video src="projects/perception/perceptionvideo-web.mp4" autoplay muted loop playsinline></video>
-        <span>Demo</span>
+    <div class="overlay-gallery-title">Live Demo</div>
+    <div style="width:100%; margin-bottom:64px;">
+      <video src="projects/perception/perceptionvideo-web.mp4" controls muted playsinline style="width:100%; border:1px solid var(--border); display:block;"></video>
+      <span style="font-family:var(--mono); font-size:9px; color:var(--muted); margin-top:8px; text-transform:uppercase; letter-spacing:0.1em; display:block;">MIT Reality Hack 2026 · Full Demo</span>
+    </div>
+
+    <div class="overlay-gallery-title">Documentation — 18 Slides</div>
+    <div style="position:relative; margin-bottom:64px;">
+      <div id="perception-slideshow" style="aspect-ratio:16/9; position:relative; overflow:hidden; border:1px solid var(--border); background:#0a0f1a;">
+        <div class="pslide active"><img src="projects/perception/perception_documentation_Page_01.png" alt="Slide 1"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_02.png" alt="Slide 2"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_03.png" alt="Slide 3"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_04.png" alt="Slide 4"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_05.png" alt="Slide 5"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_06.png" alt="Slide 6"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_07.png" alt="Slide 7"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_08.png" alt="Slide 8"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_09.png" alt="Slide 9"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_10.png" alt="Slide 10"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_11.png" alt="Slide 11"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_12.png" alt="Slide 12"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_13.png" alt="Slide 13"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_14.png" alt="Slide 14"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_15.png" alt="Slide 15"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_16.png" alt="Slide 16"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_17.png" alt="Slide 17"></div>
+        <div class="pslide"><img src="projects/perception/perception_documentation_Page_18.png" alt="Slide 18"></div>
+        <button class="p-arrow prev" onclick="pSlide(-1)">&#8592;</button>
+        <button class="p-arrow next" onclick="pSlide(1)">&#8594;</button>
       </div>
-      <div class="overlay-grid-item"><img src="projects/perception/perception_documentation_Page_14.png" alt=""><span>Documentation</span></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+        <span style="font-family:var(--mono); font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">Documentation · MIT Reality Hack 2026</span>
+        <span id="p-counter" style="font-family:var(--mono); font-size:9px; color:var(--muted);">1 / 18</span>
+      </div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -2228,6 +2267,18 @@ function initLightboxListeners() {
 
 // Initialize on load
 initLightboxListeners();
+
+// Perception documentation slideshow
+(function() {
+  const pSlides = document.querySelectorAll('#perception-slideshow .pslide');
+  let pIdx = 0;
+  window.pSlide = function(dir) {
+    pSlides[pIdx].classList.remove('active');
+    pIdx = (pIdx + dir + pSlides.length) % pSlides.length;
+    pSlides[pIdx].classList.add('active');
+    document.getElementById('p-counter').textContent = (pIdx + 1) + ' / ' + pSlides.length;
+  };
+})();
 </script>
 </body>
 </html>
