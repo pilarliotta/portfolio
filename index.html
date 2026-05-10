@@ -617,6 +617,22 @@ footer {
   z-index: 1;
 }
 
+/* VSCO gallery — show full images, 4 columns, no crop */
+#overlay-vsco .overlay-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+#overlay-vsco .overlay-grid-item {
+  aspect-ratio: 3/4;
+  background: #111;
+}
+#overlay-vsco .overlay-grid-item:first-child {
+  grid-column: 1 / 3;
+  aspect-ratio: 4/3;
+}
+#overlay-vsco .overlay-grid-item img {
+  object-fit: contain;
+}
+
 .overlay-reflection {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -919,20 +935,30 @@ footer {
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Installation · 2026</div><div class="project-card-name">Perception</div></div>
     </div>
-    <div class="project-card" onclick="openOverlay('vsco')">
-      <div class="project-card-bg" style="background-image:url('projects/vsco/IMG_5239.webp');"></div>
+    <div class="project-card" onclick="openOverlay('touchdesigner')">
+      <video autoplay muted loop playsinline src="projects/touchdesigner/touchdesigner-web.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"></video>
+      <div class="project-card-overlay" style="z-index:1;"></div>
+      <div class="project-card-info" style="z-index:2;"><div class="project-card-label">Interactive · Generative · 2025</div><div class="project-card-name">TouchDesigner</div></div>
+    </div>
+    <div class="project-card" onclick="openOverlay('diesel')">
+      <div class="project-card-bg" style="background-image:url('projects/diesel/DieselMockup.webp');"></div>
       <div class="project-card-overlay"></div>
-      <div class="project-card-info"><div class="project-card-label">Photography · 2024</div><div class="project-card-name">VSCO Collaboration</div></div>
+      <div class="project-card-info"><div class="project-card-label">Editorial · Fashion · 2024</div><div class="project-card-name">Diesel A/W 23</div></div>
+    </div>
+    <div class="project-card" onclick="openOverlay('graphicdesign')">
+      <div class="project-card-bg" style="background-image:url('projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg');"></div>
+      <div class="project-card-overlay"></div>
+      <div class="project-card-info"><div class="project-card-label">Mixed · 2024–25</div><div class="project-card-name">SCAD Mixed Gallery</div></div>
+    </div>
+    <div class="project-card" onclick="openOverlay('personalgallery')">
+      <div class="project-card-bg" style="background-image:url('projects/mixmedia/0d14cace-f903-435c-9acd-c1f9c9495e2e-0.webp');"></div>
+      <div class="project-card-overlay"></div>
+      <div class="project-card-info"><div class="project-card-label">Photos &amp; Video · 2025</div><div class="project-card-name">Personal Gallery</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('taragui')">
       <div class="project-card-bg" style="background-image:url('projects/taragui/holdingmate.webp');"></div>
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Branding · Packaging · 2024</div><div class="project-card-name">Taragüi Rebrand</div></div>
-    </div>
-    <div class="project-card" onclick="openOverlay('anderson')">
-      <div class="project-card-bg" style="background-image:url('projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp');"></div>
-      <div class="project-card-overlay"></div>
-      <div class="project-card-info"><div class="project-card-label">Exhibition Design · 2024</div><div class="project-card-name">Gallery Anderson Smith</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('dataportrait')">
       <div class="project-card-bg" style="background-image:url('projects/dataportrait/dataportrait.jpg');"></div>
@@ -954,30 +980,20 @@ footer {
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Experimental Book · 2025</div><div class="project-card-name">Baskerville</div></div>
     </div>
-    <div class="project-card" onclick="openOverlay('touchdesigner')">
-      <video autoplay muted loop playsinline src="projects/touchdesigner/touchdesigner-web.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"></video>
-      <div class="project-card-overlay" style="z-index:1;"></div>
-      <div class="project-card-info" style="z-index:2;"><div class="project-card-label">Interactive · Generative · 2025</div><div class="project-card-name">TouchDesigner</div></div>
-    </div>
     <div class="project-card" onclick="openOverlay('opticalillusion')">
       <div class="project-card-bg" style="background-image:url('projects/opticalillusion/opticalillusion.jpg');"></div>
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Interactive · p5.js · 2025</div><div class="project-card-name">Optical Illusion</div></div>
     </div>
-    <div class="project-card" onclick="openOverlay('personalgallery')">
-      <div class="project-card-bg" style="background-image:url('projects/mixmedia/0d14cace-f903-435c-9acd-c1f9c9495e2e-0.webp');"></div>
+    <div class="project-card" onclick="openOverlay('anderson')">
+      <div class="project-card-bg" style="background-image:url('projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp');"></div>
       <div class="project-card-overlay"></div>
-      <div class="project-card-info"><div class="project-card-label">Photos &amp; Video · 2025</div><div class="project-card-name">Personal Gallery</div></div>
+      <div class="project-card-info"><div class="project-card-label">Exhibition Design · 2024</div><div class="project-card-name">Gallery Anderson Smith</div></div>
     </div>
-    <div class="project-card" onclick="openOverlay('graphicdesign')">
-      <div class="project-card-bg" style="background-image:url('projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg');"></div>
+    <div class="project-card" onclick="openOverlay('vsco')">
+      <div class="project-card-bg" style="background-image:url('projects/vsco/IMG_5239.webp');"></div>
       <div class="project-card-overlay"></div>
-      <div class="project-card-info"><div class="project-card-label">Mixed · 2024–25</div><div class="project-card-name">SCAD Mixed Gallery</div></div>
-    </div>
-    <div class="project-card" onclick="openOverlay('diesel')">
-      <div class="project-card-bg" style="background-image:url('projects/diesel/DieselMockup.webp');"></div>
-      <div class="project-card-overlay"></div>
-      <div class="project-card-info"><div class="project-card-label">Editorial · Fashion · 2024</div><div class="project-card-name">Diesel A/W 23</div></div>
+      <div class="project-card-info"><div class="project-card-label">Photography · 2024</div><div class="project-card-name">VSCO Collaboration</div></div>
     </div>
   </div>
 </section>
