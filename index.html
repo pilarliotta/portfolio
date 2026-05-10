@@ -2121,13 +2121,29 @@ document.addEventListener('mousemove', e => {
 const slides = document.querySelectorAll('.hero-slide');
 const dots = document.querySelectorAll('.hero-dot');
 let slideIdx = 0;
+
+function handleSlideVideo(slide) {
+  const v = slide.querySelector('video');
+  if (v) {
+    v.play().catch(err => console.log("Autoplay blocked or interrupted", err));
+  }
+}
+
 function goToSlide(n) {
   slides[slideIdx].classList.remove('active');
   dots[slideIdx].classList.remove('active');
+  
   slideIdx = (n + slides.length) % slides.length;
+  
   slides[slideIdx].classList.add('active');
   dots[slideIdx].classList.add('active');
+  
+  handleSlideVideo(slides[slideIdx]);
 }
+
+// Ensure first slide video plays on load
+handleSlideVideo(slides[0]);
+
 setInterval(() => goToSlide(slideIdx + 1), 3000);
 dots.forEach((dot, i) => dot.addEventListener('click', () => goToSlide(i)));
 
