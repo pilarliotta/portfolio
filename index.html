@@ -938,7 +938,7 @@ footer {
 <section class="section" style="padding-top:0;">
   <div class="section-header">
     <h2 class="section-title">All<br><em>Projects</em></h2>
-    <span class="section-count">13 projects</span>
+    <span class="section-count">14 projects</span>
   </div>
   <div class="projects-grid">
     <div class="project-card" onclick="openOverlay('meme')">
@@ -960,6 +960,11 @@ footer {
       <div class="project-card-bg" style="background-image:url('projects/diesel/DieselMockup.webp');"></div>
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Editorial · Fashion · 2024</div><div class="project-card-name">Diesel A/W 23</div></div>
+    </div>
+    <div class="project-card" onclick="openOverlay('meta')">
+      <div class="project-card-bg" style="background-image:url('projects/meta/IMG_9511.PNG'); background-position: center;"></div>
+      <div class="project-card-overlay"></div>
+      <div class="project-card-info"><div class="project-card-label">Campaign · 2022</div><div class="project-card-name">Instagram — Meta</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('graphicdesign')">
       <div class="project-card-bg" style="background-image:url('projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg');"></div>
@@ -1404,6 +1409,67 @@ footer {
   </div>
   <div class="overlay-next" onclick="closeOverlay('perception'); openOverlay('chastain')">
     <div><div class="overlay-next-label">Back to start</div><div class="overlay-next-name">Chastain Horse Park</div></div>
+    <div class="overlay-next-arrow">→</div>
+  </div>
+</div>
+
+<!-- META -->
+<div class="project-overlay" id="overlay-meta" role="dialog" aria-modal="true">
+  <div class="overlay-nav">
+    <button class="overlay-back" onclick="closeOverlay('meta')">Back to work</button>
+    <span class="overlay-title-small">Instagram — Meta</span>
+  </div>
+  <div class="overlay-hero">
+    <div class="overlay-hero-img">
+      <div class="overlay-hero-img-inner">
+        <img src="projects/meta/IMG_9510.PNG" alt="Instagram Brand Imagery — Meta" style="object-fit:cover;">
+      </div>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="overlay-hero-content">
+      <div>
+        <div class="overlay-eyebrow">Campaign · Brand Imagery · 2022</div>
+        <h2 class="overlay-project-title">Instagram<br><em>— Meta</em></h2>
+        <p class="overlay-desc">Creative assets developed for Instagram's Brand Imagery campaign and Edits feature content. Visuals contributed to public-facing campaign materials across Instagram's @creators channel, blending personal visual storytelling with Meta's global brand direction.</p>
+      </div>
+      <div class="overlay-meta-grid">
+        <div><div class="overlay-meta-label">Role</div><div class="overlay-meta-val">Freelance Creative Contributor</div></div>
+        <div><div class="overlay-meta-label">Year</div><div class="overlay-meta-val">2022</div></div>
+        <div><div class="overlay-meta-label">Category</div><div class="overlay-meta-val">Campaign, Brand Imagery</div></div>
+        <div><div class="overlay-meta-label">Client</div><div class="overlay-meta-val">Meta / Instagram</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-gallery">
+    <div class="overlay-gallery-title">Selected work — Instagram @creators</div>
+    <div class="overlay-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="overlay-grid-item" style="aspect-ratio:9/16;">
+        <img src="projects/meta/IMG_9509.PNG" alt="Feel it, film it, see it">
+        <span>Feel it, film it, see it</span>
+      </div>
+      <div class="overlay-grid-item" style="aspect-ratio:9/16;">
+        <img src="projects/meta/IMG_9510.PNG" alt="Feel it, film it, see it">
+        <span>Feel it, film it, see it</span>
+      </div>
+      <div class="overlay-grid-item" style="aspect-ratio:9/16;">
+        <img src="projects/meta/IMG_9511.PNG" alt="Feel it, film it, see it">
+        <span>Feel it, film it, see it</span>
+      </div>
+      <div class="overlay-grid-item" style="grid-column:1/3; aspect-ratio:16/9;">
+        <img src="projects/meta/IMG_8622.jpeg" alt="Edits — Duration Controls">
+        <span>Edits — Duration Controls on Transitions</span>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-reflection">
+    <div><h3 class="overlay-reflection-title">Your work,<br>their <em>platform.</em></h3></div>
+    <div>
+      <p class="overlay-reflection-body">Contributing to a global brand's public-facing campaign means your visual language gets filtered through someone else's guidelines — and still has to feel like you. These assets ran across Instagram's @creators channel and Edits product feature content.</p>
+      <p class="overlay-reflection-body" style="margin-top:16px; font-size:11px; color:var(--muted);">All trademarks and brand assets belong to their respective owners. Work shown is publicly released campaign imagery.</p>
+    </div>
+  </div>
+  <div class="overlay-next" onclick="closeOverlay('meta'); openOverlay('vsco')">
+    <div><div class="overlay-next-label">Next project</div><div class="overlay-next-name">VSCO Collaboration</div></div>
     <div class="overlay-next-arrow">→</div>
   </div>
 </div>
