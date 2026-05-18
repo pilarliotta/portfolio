@@ -938,7 +938,7 @@ footer {
 <section class="section" style="padding-top:0;">
   <div class="section-header">
     <h2 class="section-title">All<br><em>Projects</em></h2>
-    <span class="section-count">14 projects</span>
+    <span class="section-count">15 projects</span>
   </div>
   <div class="projects-grid">
     <div class="project-card" onclick="openOverlay('meme')">
@@ -980,6 +980,11 @@ footer {
       <div class="project-card-bg" style="background-image:url('projects/taragui/holdingmate.webp');"></div>
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Branding · Packaging · 2024</div><div class="project-card-name">Taragüi Rebrand</div></div>
+    </div>
+    <div class="project-card" onclick="openOverlay('sophieharrisphoto')">
+      <div class="project-card-bg" style="background-image:url('projects/sophieharrisphoto/Mockup.png'); background-size:cover;"></div>
+      <div class="project-card-overlay"></div>
+      <div class="project-card-info"><div class="project-card-label">Branding · Commission · 2025</div><div class="project-card-name">Sophie Harris Photo</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('dataportrait')">
       <div class="project-card-bg" style="background-image:url('projects/dataportrait/dataportrait.jpg');"></div>
@@ -1513,6 +1518,102 @@ footer {
   <div class="overlay-reflection">
     <div><h3 class="overlay-reflection-title">Editing as<br><em>authorship.</em></h3></div>
     <div><p class="overlay-reflection-body">Campaign stills and editorial imagery from the VSCO collaboration, selected edits used across promotional channels including the Beta Spaces launch.</p></div>
+  </div>
+</div>
+
+<!-- SOPHIE HARRIS PHOTO -->
+<div class="project-overlay" id="overlay-sophieharrisphoto" role="dialog" aria-modal="true">
+  <div class="overlay-nav">
+    <button class="overlay-back" onclick="closeOverlay('sophieharrisphoto')">Back to work</button>
+    <span class="overlay-title-small">Sophie Harris Photo</span>
+  </div>
+  <div class="overlay-hero">
+    <div class="overlay-hero-img">
+      <div class="overlay-hero-img-inner">
+        <img src="projects/sophieharrisphoto/Mockup.png" alt="Sophie Harris Photo branding">
+      </div>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="overlay-hero-content">
+      <div>
+        <div class="overlay-eyebrow">Branding · Logo · Commission · 2025</div>
+        <h2 class="overlay-project-title">Sophie<br><em>Harris Photo</em></h2>
+        <p class="overlay-desc">Commission logo and brand identity for Atlanta-based photographer Sophie Harris. She wanted distortion — so I gave her two levels of it. One version slightly warped, one fully melting, both built around the same bold gothic type with chromatic aberration and glow bleeding into the form.</p>
+        <p class="overlay-desc">The distortion became the brand pattern — repeated across merch, cards, and digital assets.</p>
+      </div>
+      <div class="overlay-meta-grid">
+        <div><div class="overlay-meta-label">Role</div><div class="overlay-meta-val">Brand Designer</div></div>
+        <div><div class="overlay-meta-label">Year</div><div class="overlay-meta-val">2025</div></div>
+        <div><div class="overlay-meta-label">Category</div><div class="overlay-meta-val">Branding, Identity</div></div>
+        <div><div class="overlay-meta-label">Client</div><div class="overlay-meta-val">@sophieharrisphoto</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-gallery">
+    <div class="overlay-gallery-title">Logo — Two distortion levels</div>
+    <div class="overlay-grid" style="grid-template-columns:repeat(2,1fr); gap:2px; margin-bottom:64px;">
+      <div class="overlay-grid-item" style="aspect-ratio:4/3; background:#fff;">
+        <img src="projects/sophieharrisphoto/Mocku2p.png" alt="Logo — slight distortion">
+        <span>Slight distortion</span>
+      </div>
+      <div class="overlay-grid-item" style="aspect-ratio:4/3; background:#fff;">
+        <img src="projects/sophieharrisphoto/Mockup.png" alt="Logo — heavy distortion">
+        <span>Heavy distortion</span>
+      </div>
+    </div>
+
+    <div class="overlay-gallery-title">Brand pattern</div>
+    <div style="width:100%; margin-bottom:64px;">
+      <img src="projects/sophieharrisphoto/pattern.png" alt="Brand pattern" style="width:100%; display:block; border:1px solid var(--border);">
+    </div>
+
+    <div class="overlay-gallery-title">Merchandise mockups</div>
+    <div class="overlay-grid" style="grid-template-columns:repeat(3,1fr); gap:2px; margin-bottom:64px;">
+      <div class="overlay-grid-item" style="aspect-ratio:1/1;">
+        <img src="projects/sophieharrisphoto/Cap_01.png" alt="Cap front">
+        <span>Cap — front</span>
+      </div>
+      <div class="overlay-grid-item" style="aspect-ratio:1/1;">
+        <img src="projects/sophieharrisphoto/Cap_03.png" alt="Cap side">
+        <span>Cap — side</span>
+      </div>
+      <div class="overlay-grid-item" style="aspect-ratio:1/1;">
+        <img src="projects/sophieharrisphoto/shirt.png" alt="Shirt mockup">
+        <span>Shirt</span>
+      </div>
+    </div>
+
+    <div class="overlay-gallery-title">Motion</div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:64px;">
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);">
+          <video src="projects/sophieharrisphoto/sophiemotion.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+        </div>
+        <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Motion 01</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);">
+          <video src="projects/sophieharrisphoto/sophiemotion2_compressed.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+        </div>
+        <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Motion 02</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);">
+          <video src="projects/sophieharrisphoto/sophiemotion3_compressed.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+        </div>
+        <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Motion 03</span>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-reflection">
+    <div><h3 class="overlay-reflection-title">Distortion<br>as <em>identity.</em></h3></div>
+    <div>
+      <p class="overlay-reflection-body">The brief was simple: make it feel broken on purpose. The glitch and glow aren't effects applied after — they're baked into the letterforms themselves, so the decay is the logo. Two levels let Sophie choose how far she wants to push it depending on context.</p>
+    </div>
+  </div>
+  <div class="overlay-next" onclick="closeOverlay('sophieharrisphoto'); openOverlay('taragui')">
+    <div><div class="overlay-next-label">Next project</div><div class="overlay-next-name">Taragüi Rebrand</div></div>
+    <div class="overlay-next-arrow">→</div>
   </div>
 </div>
 
