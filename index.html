@@ -128,6 +128,16 @@ nav {
   margin-bottom: 32px;
 }
 .hero-name em { font-style: italic; color: var(--accent); transition: color 0.3s; }
+.halftone-name {
+  background-size: 12px 12px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-style: normal;
+}
+.halftone-name.is-dark { background-image: radial-gradient(circle, var(--text) 38%, transparent 40%); }
+.halftone-name.is-accent { background-image: radial-gradient(circle, var(--accent) 38%, transparent 40%); transition: background-image 0.3s; }
 .hero-desc {
   font-family: var(--mono);
   font-size: 13px;
@@ -798,7 +808,7 @@ footer {
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">Designer · Photographer · Creative Technologist</div>
-    <h1 class="hero-name">Pilar<br><em>Liotta</em></h1>
+    <h1 class="hero-name"><span class="halftone-name is-dark">Pilar</span><br><span class="halftone-name is-accent">Liotta</span></h1>
     <p class="hero-desc">Argentine American designer, photographer, and creative technologist. BFA SCAD · MFA Design &amp; Technology, Parsons '27. New York.</p>
     <div class="hero-meta">
       <div class="meta-item">
