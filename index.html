@@ -411,6 +411,20 @@ nav {
   margin-bottom: 32px;
 }
 .about-big em { font-style: italic; color: var(--accent); transition: color 0.3s; }
+.design-word {
+  background-image: linear-gradient(90deg, #ff5f6d, #ffc371, #4ade80, #38bdf8, #a78bfa, #ff5f6d);
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+  transition: background-position 1.2s ease, -webkit-text-fill-color 0.3s ease;
+}
+.design-word:hover {
+  -webkit-text-fill-color: transparent;
+  background-position: 100% 50%;
+}
 .about-body { font-family: var(--mono); font-size: 13px; color: var(--muted); line-height: 1.9; max-width: 420px; }
 .skills-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
 .skill-tag {
@@ -1027,9 +1041,9 @@ footer {
 <!-- ABOUT -->
 <section class="about-strip" id="about">
   <div class="about-left">
-    <h2 class="about-big">Designer, photographer, creative technologist.</h2>
-    <p class="about-body">I'm Pilar Liotta, an Argentine American creative working across branding, editorial, interaction design, and creative code. I'm drawn to color, and to how visual systems actually shape the way people behave.</p>
-    <p class="about-body" style="margin-top:20px;">MFA Design &amp; Technology, Parsons 2027. BFA Graphic Design + Photography, SCAD. Impact Entrepreneurship Fellow with Re:Frame, a media literacy platform. Based in New York.</p>
+    <h2 class="about-big">Versatile by <span class="design-word">design</span>.</h2>
+    <p class="about-body">I earned my BFA in Graphic Design at SCAD. Wanting to work more closely with technology, I continued my education at Parsons, where I am pursuing an MFA in Design and Technology to build interactive, code driven experiences.</p>
+    <p class="about-body" style="margin-top:20px;">I am an Impact Entrepreneurship Fellow with Re:Frame, a media literacy platform. My work spans branding, editorial, interaction design, creative code, and photography. Based in New York.</p>
     <div class="skills-list">
       <span class="skill-tag">Branding</span>
       <span class="skill-tag">Editorial</span>
