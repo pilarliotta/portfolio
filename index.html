@@ -421,7 +421,8 @@ nav {
   -webkit-text-fill-color: currentColor;
   transition: background-position 1.2s ease, -webkit-text-fill-color 0.3s ease;
 }
-.design-word:hover {
+.design-word:hover,
+.design-word.is-active {
   -webkit-text-fill-color: transparent;
   background-position: 100% 50%;
 }
@@ -2348,6 +2349,15 @@ footer {
 
 <!-- ═══════════════════════════════════ JS ═══════════════════════════════════ -->
 <script>
+// Design word: make it work on tap for phones/touch, not just mouse hover
+document.querySelectorAll('.design-word').forEach(el => {
+  el.addEventListener('touchstart', () => {
+    el.classList.add('is-active');
+    clearTimeout(el._colorTimeout);
+    el._colorTimeout = setTimeout(() => el.classList.remove('is-active'), 1200);
+  }, { passive: true });
+});
+
 // Star cursor
 const cursor = document.getElementById('cursor');
 let rafId = null, cx = 0, cy = 0;
