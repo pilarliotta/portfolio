@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pilar Liotta — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --accent: #C7FF00;
@@ -12,8 +12,14 @@
   --text: #0a0a0a;
   --muted: #888;
   --border: rgba(0,0,0,0.08);
-  --serif: 'Playfair Display', Georgia, serif;
+  --serif: 'Geist Pixel', 'DM Mono', monospace;
   --mono: 'DM Mono', monospace;
+  --pixel: 'Geist Pixel', 'DM Mono', monospace;
+}
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('fonts/GeistPixel-Regular-VariableFont_ELSH.ttf') format('truetype');
+  font-weight: 100 900;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,14 +36,14 @@ body {
 /* CURSOR */
 .cursor {
   position: fixed;
-  width: 28px; height: 28px;
+  width: 48px; height: 48px;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%,-50%);
   display: flex; align-items: center; justify-content: center;
 }
-.cursor svg { width: 22px; height: 22px; display: block; transition: transform 0.15s; }
-.cursor.big svg { transform: scale(1.8); }
+.cursor-glyph { font-size: 42px; line-height: 1; color: currentColor; display: block; transition: transform 0.15s; }
+.cursor.big .cursor-glyph { transform: scale(1.6); }
 .cursor.plus::before {
   content: '+';
   position: absolute;
@@ -49,45 +55,38 @@ body {
   color: #000;
   z-index: 2;
 }
-.cursor.plus svg { transform: scale(2.2); }
-.cursor::after {
-  content: '';
-  position: absolute;
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  border: 2px solid currentColor;
-  opacity: 0.15;
-  pointer-events: none;
-}
+.cursor.plus .cursor-glyph { transform: scale(2.2); }
 
 /* NAV */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 32px;
-  background: rgba(255,255,255,0.92);
+  padding: 0 32px;
+  background: rgba(10,10,10,0.92);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  box-sizing: border-box;
 }
 .nav-logo {
-  font-family: var(--serif);
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--text);
+  font-family: var(--pixel);
+  font-size: 15px;
+  font-weight: 700;
+  color: #f5f5f5;
   text-decoration: none;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
 }
-.nav-logo em { font-style: italic; color: var(--accent); transition: color 0.3s; }
+.nav-logo em { font-style: normal; color: var(--accent); transition: color 0.3s; }
 .nav-links { display: flex; gap: 32px; align-items: center; }
 .nav-links a {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
-  color: var(--text);
+  color: #f5f5f5;
   text-decoration: none;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -119,25 +118,15 @@ nav {
   margin-bottom: 24px;
 }
 .hero-name {
-  font-family: var(--serif);
-  font-size: clamp(56px, 8vw, 96px);
-  font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-family: var(--pixel);
+  font-size: clamp(48px, 7vw, 84px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01em;
   color: var(--text);
   margin-bottom: 32px;
 }
-.hero-name em { font-style: italic; color: var(--accent); transition: color 0.3s; }
-.halftone-name {
-  background-size: 5px 5px;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  font-style: normal;
-}
-.halftone-name.is-dark { background-image: radial-gradient(circle, var(--text) 38%, transparent 40%); }
-.halftone-name.is-accent { background-image: radial-gradient(circle, var(--accent) 38%, transparent 40%); transition: background-image 0.3s; }
+.hero-name em { font-style: normal; color: var(--accent); transition: color 0.3s; }
 .hero-desc {
   font-family: var(--mono);
   font-size: 13px;
@@ -231,7 +220,7 @@ nav {
   letter-spacing: -0.03em;
   line-height: 0.95;
 }
-.section-title em { font-style: italic; color: var(--accent); transition: color 0.3s; }
+.section-title em { font-family: var(--pixel); font-style: normal; font-weight: 700; letter-spacing: 0.03em; font-size: 0.9em; color: var(--accent); transition: color 0.3s; }
 .section-count { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
 
 /* FEATURED GRID */
@@ -338,20 +327,18 @@ nav {
 .project-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
-  opacity: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+  opacity: 1;
   transition: opacity 0.3s;
 }
 .project-card:hover .project-card-overlay { opacity: 1; }
 .project-card-info {
   position: absolute;
-  bottom: -40px;
+  bottom: 0;
   left: 0; right: 0;
   padding: 20px;
   z-index: 2;
-  transition: bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.project-card:hover .project-card-info { bottom: 0; }
 .project-card-label {
   font-family: var(--mono);
   font-size: 8px;
@@ -360,7 +347,11 @@ nav {
   color: var(--accent);
   transition: color 0.3s;
   margin-bottom: 4px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s, transform 0.3s;
 }
+.project-card:hover .project-card-label { opacity: 1; transform: translateY(0); }
 .project-card-name {
   font-family: var(--serif);
   font-size: 18px;
@@ -420,21 +411,14 @@ nav {
   letter-spacing: -0.02em;
   margin-bottom: 32px;
 }
-.about-big em { font-style: italic; color: var(--accent); transition: color 0.3s; }
+.about-big em { font-family: var(--pixel); font-style: normal; font-weight: 700; letter-spacing: 0.03em; font-size: 0.9em; color: var(--accent); transition: color 0.3s; }
 .design-word {
-  background-image: linear-gradient(90deg, #ff5f6d, #ffc371, #4ade80, #38bdf8, #a78bfa, #ff5f6d);
-  background-size: 300% 100%;
-  background-position: 0% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
   color: inherit;
-  -webkit-text-fill-color: currentColor;
-  transition: background-position 1.2s ease, -webkit-text-fill-color 0.3s ease;
+  transition: color 0.3s;
 }
 .design-word:hover,
 .design-word.is-active {
-  -webkit-text-fill-color: transparent;
-  background-position: 100% 50%;
+  color: var(--accent);
 }
 .about-body { font-family: var(--mono); font-size: 13px; color: var(--muted); line-height: 1.9; max-width: 420px; }
 .skills-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
@@ -582,7 +566,7 @@ footer {
   color: var(--text);
   margin-bottom: 32px;
 }
-.overlay-project-title em { font-style: italic; color: var(--accent); transition: color 0.3s; }
+.overlay-project-title em { font-family: var(--pixel); font-style: normal; font-weight: 700; letter-spacing: 0.03em; font-size: 0.9em; color: var(--accent); transition: color 0.3s; }
 .overlay-desc {
   font-family: var(--mono);
   font-size: 13px;
@@ -621,7 +605,6 @@ footer {
   overflow: hidden;
   position: relative;
 }
-.overlay-grid-item:first-child { grid-column: 1 / 3; aspect-ratio: 16/9; }
 .overlay-grid-item img, .overlay-grid-item video {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.3s;
@@ -658,6 +641,32 @@ footer {
 .p-arrow.prev { left:12px; }
 .p-arrow.next { right:12px; }
 
+/* World Cup Series — portrait posters, no crop */
+#overlay-worldcup .overlay-grid-item {
+  aspect-ratio: 4/3;
+  background: #0d0d0d;
+}
+#overlay-worldcup .overlay-grid-item:first-child {
+  grid-column: 1;
+  aspect-ratio: 4/3;
+}
+#overlay-worldcup .overlay-grid-item img {
+  object-fit: contain;
+}
+
+/* Cyanotype — portrait grid, no crop */
+#overlay-cyanotype .overlay-grid-item {
+  aspect-ratio: 3/4;
+  background: #060d1a;
+}
+#overlay-cyanotype .overlay-grid-item:first-child {
+  grid-column: 1;
+  aspect-ratio: 3/4;
+}
+#overlay-cyanotype .overlay-grid-item img {
+  object-fit: contain;
+}
+
 /* VSCO gallery — show full images, 4 columns, no crop */
 #overlay-vsco .overlay-grid {
   grid-template-columns: repeat(4, 1fr);
@@ -688,7 +697,7 @@ footer {
   line-height: 1.05;
   margin-bottom: 24px;
 }
-.overlay-reflection-title em { font-style: italic; color: var(--accent); transition: color 0.3s; }
+.overlay-reflection-title em { font-family: var(--pixel); font-style: normal; font-weight: 700; letter-spacing: 0.03em; font-size: 0.9em; color: var(--accent); transition: color 0.3s; }
 .overlay-reflection-body { font-family: var(--mono); font-size: 13px; color: var(--muted); line-height: 1.9; }
 .overlay-reflection-body + .overlay-reflection-body { margin-top: 20px; }
 
@@ -784,11 +793,7 @@ footer {
 </head>
 <body>
 
-<div class="cursor" id="cursor" aria-hidden="true">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" vector-effect="non-scaling-stroke"/>
-  </svg>
-</div>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-glyph">☠︎︎</span></div>
 
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close">Close</button>
@@ -808,7 +813,7 @@ footer {
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">Designer · Photographer · Creative Technologist</div>
-    <h1 class="hero-name"><span class="halftone-name is-dark">Pilar</span><br><span class="halftone-name is-accent">Liotta</span></h1>
+    <h1 class="hero-name">Pilar<br><em>Liotta</em></h1>
     <p class="hero-desc">Argentine American designer, photographer, and creative technologist. BFA SCAD · MFA Design &amp; Technology, Parsons '27. New York.</p>
     <div class="hero-meta">
       <div class="meta-item">
@@ -843,6 +848,7 @@ footer {
     <div class="hero-slide-bar"></div>
     <div class="hero-slide-dots" id="slideDots">
       <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
       <div class="hero-dot"></div>
       <div class="hero-dot"></div>
       <div class="hero-dot"></div>
@@ -963,9 +969,19 @@ footer {
 <section class="section" style="padding-top:0;">
   <div class="section-header">
     <h2 class="section-title">All<br><em>Projects</em></h2>
-    <span class="section-count">15 projects</span>
+    <span class="section-count">18 projects</span>
   </div>
   <div class="projects-grid">
+    <div class="project-card" onclick="openOverlay('worldcup')">
+      <div class="project-card-bg" style="background-image:url('projects/graphicsgallery/final4messi.jpg');"></div>
+      <div class="project-card-overlay"></div>
+      <div class="project-card-info"><div class="project-card-label">Sports · World Cup · 2022 · 2026</div><div class="project-card-name">World Cup Series</div></div>
+    </div>
+    <div class="project-card" onclick="openOverlay('cyanotype')" style="background:#060d1a;">
+      <div class="project-card-bg" style="background-image:url('cyanotype/IMG_9513.JPG');background-size:contain;background-repeat:no-repeat;background-position:center;"></div>
+      <div class="project-card-overlay"></div>
+      <div class="project-card-info"><div class="project-card-label">Analog · Mixed Media · 2025</div><div class="project-card-name">Cyanotype</div></div>
+    </div>
     <div class="project-card" onclick="openOverlay('meme')">
       <div class="project-card-bg" style="background-image:url('projects/meme/memeintro.png');"></div>
       <div class="project-card-overlay"></div>
@@ -990,6 +1006,11 @@ footer {
       <div class="project-card-bg" style="background-image:url('projects/diesel/DieselMockup.webp');"></div>
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Editorial · Fashion · 2024</div><div class="project-card-name">Diesel A/W 23</div></div>
+    </div>
+    <div class="project-card" onclick="openOverlay('anderson')">
+      <div class="project-card-bg" style="background-image:url('projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp');"></div>
+      <div class="project-card-overlay"></div>
+      <div class="project-card-info"><div class="project-card-label">Exhibition Design · 2024</div><div class="project-card-name">Gallery Anderson Smith</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('meta')">
       <div class="project-card-bg" style="background-image:url('projects/meta/IMG_9510.PNG'); background-position: center 55%;"></div>
@@ -1036,11 +1057,6 @@ footer {
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Interactive · p5.js · 2025</div><div class="project-card-name">Optical Illusion</div></div>
     </div>
-    <div class="project-card" onclick="openOverlay('anderson')">
-      <div class="project-card-bg" style="background-image:url('projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp');"></div>
-      <div class="project-card-overlay"></div>
-      <div class="project-card-info"><div class="project-card-label">Exhibition Design · 2024</div><div class="project-card-name">Gallery Anderson Smith</div></div>
-    </div>
     <div class="project-card" onclick="openOverlay('vsco')">
       <div class="project-card-bg" style="background-image:url('projects/vsco/IMG_5239.webp');"></div>
       <div class="project-card-overlay"></div>
@@ -1053,7 +1069,7 @@ footer {
 <section class="about-strip" id="about">
   <div class="about-left">
     <h2 class="about-big">Versatile by <span class="design-word">design</span>.</h2>
-    <p class="about-body">I earned my BFA in Graphic Design at SCAD. Wanting to work more closely with technology, I continued my education at Parsons, where I am pursuing an MFA in Design and Technology to build interactive, code driven experiences.</p>
+    <p class="about-body">I earned my BFA in Graphic Design with a minor in Photography at SCAD. Wanting to work more closely with technology, I continued my education at Parsons, where I am pursuing an MFA in Design and Technology to build interactive, code driven experiences.</p>
     <p class="about-body" style="margin-top:20px;">I am an Impact Entrepreneurship Fellow with Re:Frame, a media literacy platform. My work spans branding, editorial, interaction design, creative code, and photography. Based in New York.</p>
     <div class="skills-list">
       <span class="skill-tag">Branding</span>
@@ -1126,7 +1142,7 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Logo system</div>
     <div class="overlay-grid" style="margin-bottom:2px;">
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:auto;"><img src="projects/chastain/chastainprocess/logowithothers.png" alt="Chastain logo system — main and wayfinding variants" style="position:relative;width:100%;height:auto;object-fit:contain;background:#f5f0ea;padding:32px;"></div>
+      <div class="overlay-grid-item" style="background:#f5f0ea;aspect-ratio:4/3;"><img src="projects/chastain/chastainprocess/logowithothers.png" alt="Chastain logo system — main and wayfinding variants" style="object-fit:contain;padding:24px;"></div>
     </div>
 
     <div class="overlay-gallery-title" style="margin-top:48px;">Website Walkthrough</div>
@@ -1137,15 +1153,15 @@ footer {
 
     <div class="overlay-gallery-title" style="margin-top:48px;">Selected work</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/chastain/parkviewer.webp" alt="Therapeutic Horsemanship interpretive sign — laser cut on wood, SCAD SERVE"><span>Therapeutic Horsemanship sign · SCAD FASH 2024</span></div>
+      <div class="overlay-grid-item"><img src="projects/chastain/parkviewer.webp" alt="Therapeutic Horsemanship interpretive sign — laser cut on wood, SCAD SERVE"><span>Therapeutic Horsemanship sign · SCAD FASH 2024</span></div>
       <div class="overlay-grid-item"><img src="projects/chastain/ChastainPoloShirt_RegularWoodBackground.webp" alt=""><span>Polo shirt</span></div>
       <div class="overlay-grid-item"><img src="projects/chastain/doormockup.webp" alt=""><span>Signage</span></div>
       <div class="overlay-grid-item"><img src="projects/chastain/fannypack.webp" alt=""><span>Merchandise</span></div>
       <div class="overlay-grid-item"><img src="projects/chastain/Hand+Holding+Metal+Mug.webp" alt=""><span>Mug</span></div>
       <div class="overlay-grid-item"><img src="projects/chastain/ChastainPoloShirtTherapy.webp" alt=""><span>Therapy variant</span></div>
       <div class="overlay-grid-item"><img src="projects/chastain/chastain2.webp" alt=""><span>Identity</span></div>
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/chastain/chastainprocess/presenting.png" alt="Presenting at SCAD FASH 2024"><span>SCAD FASH 2024 presentation</span></div>
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/chastain/pickuptruckmockup.webp" alt=""><span>Vehicle wrap</span></div>
+      <div class="overlay-grid-item"><img src="projects/chastain/chastainprocess/presenting.png" alt="Presenting at SCAD FASH 2024"><span>SCAD FASH 2024 presentation</span></div>
+      <div class="overlay-grid-item"><img src="projects/chastain/pickuptruckmockup.webp" alt=""><span>Vehicle wrap</span></div>
       <div class="overlay-grid-item"><img src="projects/chastain/Stamp.webp" alt=""><span>Stamp</span></div>
       <div class="overlay-grid-item"><img src="projects/chastain/Phone.webp" alt=""><span>Social media</span></div>
     </div>
@@ -1746,7 +1762,16 @@ footer {
     </div>
   </div>
   <div class="overlay-gallery">
-    <div class="overlay-gallery-title">Selected work</div>
+    <div class="overlay-gallery-title">Video</div>
+    <div class="overlay-grid">
+      <div class="overlay-grid-item" style="aspect-ratio:9/16;background:#111;">
+        <video src="projects/galleryanderson/gallery-anderson-1-web.mp4" controls playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></video>
+      </div>
+      <div class="overlay-grid-item" style="aspect-ratio:9/16;background:#111;">
+        <video src="projects/galleryanderson/gallery-anderson-2-web.mp4" controls playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></video>
+      </div>
+    </div>
+    <div class="overlay-gallery-title" style="margin-top:48px;">Selected work</div>
     <div class="overlay-grid">
       <div class="overlay-grid-item"><img src="projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp" alt=""><span>Film festival</span></div>
       <div class="overlay-grid-item"><img src="projects/galleryanderson/DandywGrainNew.webp" alt=""><span>Dandy w/ grain</span></div>
@@ -1980,6 +2005,7 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Digital &amp; mixed media</div>
     <div class="overlay-grid">
+      <div class="overlay-grid-item"><img src="projects/mixmedia/laterneverexists.jpeg" alt="Later Never Exists"></div>
       <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_2801+2.webp" alt=""></div>
       <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_2802.webp" alt=""></div>
       <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_2804.webp" alt=""></div>
@@ -2051,6 +2077,118 @@ footer {
   </div>
 </div>
 
+<!-- CYANOTYPE -->
+<div class="project-overlay" id="overlay-cyanotype" role="dialog" aria-modal="true">
+  <div class="overlay-nav">
+    <button class="overlay-back" onclick="closeOverlay('cyanotype')">Back to work</button>
+    <span class="overlay-title-small">Cyanotype</span>
+  </div>
+  <div class="overlay-hero">
+    <div class="overlay-hero-img" style="background:#060d1a;">
+      <div class="overlay-hero-img-inner">
+        <img src="cyanotype/IMG_9507.JPG" alt="Cyanotype print — hay que cambiar" style="object-fit:contain;">
+      </div>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="overlay-hero-content">
+      <div>
+        <div class="overlay-eyebrow">Analog · Mixed Media · Summer 2025</div>
+        <h2 class="overlay-project-title">Cyano<br><em>type</em></h2>
+        <p class="overlay-desc">Connecting with physical art through cyanotype this summer. Botanical prints, layered typography, mixed media on fabric and paper. Things working and things not working — art that is human rather than perfect.</p>
+        <p class="overlay-desc" style="margin-top:16px;">The process pulls from the sun. Lace, flowers, doilies, film strips, jewelry, and my own digital designs printed on transparency and exposed on sensitized paper and fabric. Each piece is a one-off.</p>
+      </div>
+      <div class="overlay-meta-grid">
+        <div><div class="overlay-meta-label">Medium</div><div class="overlay-meta-val">Cyanotype on Paper · Fabric</div></div>
+        <div><div class="overlay-meta-label">Year</div><div class="overlay-meta-val">2025</div></div>
+        <div><div class="overlay-meta-label">Category</div><div class="overlay-meta-val">Analog, Mixed Media</div></div>
+        <div><div class="overlay-meta-label">Context</div><div class="overlay-meta-val">Personal Practice</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-gallery">
+    <div class="overlay-gallery-title">Prints</div>
+    <div class="overlay-grid">
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9507.JPG" alt="hay que cambiar"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9513.JPG" alt="You have so much power"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9500.JPG" alt="Flower oval"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9502.JPG" alt="Heart print"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9501.JPG" alt="Leaf botanical"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9503.JPG" alt="Oval with lace"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9506.JPG" alt="Prints overview"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9505%20(1).JPG" alt="Trying to be happy — layered"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9508.JPG" alt="Baroque portrait layered"></div>
+    </div>
+    <div class="overlay-gallery-title" style="margin-top:48px;">On Fabric</div>
+    <div class="overlay-grid">
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9512.JPG" alt="White t-shirt with doily and jewelry"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9504.JPG" alt="Fabric print with lace and starfish"></div>
+      <div class="overlay-grid-item"><img src="cyanotype/IMG_9509.JPG" alt="Green t-shirt with butterfly and chains"></div>
+    </div>
+  </div>
+  <div class="overlay-reflection">
+    <div><h3 class="overlay-reflection-title">Art that<br>belongs to<br>the <em>sun.</em></h3></div>
+    <div>
+      <p class="overlay-reflection-body">It's been fun to connect with physical art this summer. The combination of textures — lace, botanicals, film, jewelry, my own digital work printed on transparency — and not wanting art that's perfect but human, has been the whole point.</p>
+      <p class="overlay-reflection-body" style="margin-top:20px;">If you haven't had the chance to make some cyanotype, I suggest this fun activity to do with help from the sun. Much love.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WORLD CUP SERIES -->
+<div class="project-overlay" id="overlay-worldcup" role="dialog" aria-modal="true">
+  <div class="overlay-nav">
+    <button class="overlay-back" onclick="closeOverlay('worldcup')">Back to work</button>
+    <span class="overlay-title-small">World Cup Series</span>
+  </div>
+  <div class="overlay-hero">
+    <div class="overlay-hero-img">
+      <div class="overlay-hero-img-inner"><img src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella"></div>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="overlay-hero-content">
+      <div>
+        <div class="overlay-eyebrow">Sports Poster Series · 2022 · 2026</div>
+        <h2 class="overlay-project-title">World Cup<br><em>Series</em></h2>
+        <p class="overlay-desc">Two Messi pieces, three years apart. The first — bold, modern, colorful — made in 2022 at SCAD, celebrating him lifting the World Cup. The second made in 2026: vintage, print-style texture inspired by cyanotype prints, orange and navy, the Sol de Mayo rising behind four stars. Messi faces away this time — not a finished story, a new journey.</p>
+      </div>
+      <div class="overlay-meta-grid">
+        <div><div class="overlay-meta-label">Role</div><div class="overlay-meta-val">Design, Art Direction</div></div>
+        <div><div class="overlay-meta-label">Years</div><div class="overlay-meta-val">2022 · 2026</div></div>
+        <div><div class="overlay-meta-label">Category</div><div class="overlay-meta-val">Poster, Sports</div></div>
+        <div><div class="overlay-meta-label">Context</div><div class="overlay-meta-val">SCAD · Personal</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-gallery">
+    <div class="overlay-gallery-title">La Cuarta Estrella 2026</div>
+    <div class="overlay-grid">
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella 2026"><span>La Cuarta Estrella · 2026</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/messi-streetmockup.png" alt="Messi poster — street mockup"><span>Street mockup</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/messi-finalized.jpg" alt="Messi — 2022"><span>World Cup 2022 · SCAD</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/MessiPrinted.jpg" alt="Messi — printed"><span>Printed</span></div>
+    </div>
+    <div class="overlay-gallery-title" style="margin-top:48px;">Process · Cyanotype Prints</div>
+    <div class="overlay-grid">
+      <div class="overlay-grid-item"><img src="printsmessiforcyan.jpeg" alt="Cyanotype prints of the Messi poster"></div>
+    </div>
+
+    <div class="overlay-gallery-title" style="margin-top:48px;">The Series</div>
+    <div class="overlay-grid">
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Mbappe.jpg" alt="Mbappé"><span>Mbappé</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Ronaldo.jpg" alt="Ronaldo"><span>Ronaldo</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/IDOLSSERIES.jpg" alt="Idols series"><span>Idols series</span></div>
+    </div>
+  </div>
+  <div class="overlay-reflection">
+    <div><h3 class="overlay-reflection-title">Identity,<br>legacy, and<br><em>grit.</em></h3></div>
+    <div>
+      <p class="overlay-reflection-body">If you've ever heard Argentine fans chant about the cuarta estrella shining on the camiseta, that's the energy behind this piece — and the dream of eventually turning this design into an actual shirt.</p>
+      <p class="overlay-reflection-body" style="margin-top:20px;">Argentina often gets reduced to simple narratives, but our identity has always been complex: immigration, Indigenous roots, resilience, and a culture with an impact that reaches far beyond our borders. South America has proven again and again that we belong on the world's biggest stages. In a world of social media and AI, images shape how we see athletes, countries, and cultures. Good designers have a responsibility to tell stories with purpose and grit.</p>
+      <p class="overlay-reflection-body" style="margin-top:20px;">🇦🇷 Aguante Argentina!</p>
+    </div>
+  </div>
+</div>
+
 <!-- SCAD MIXED GALLERY -->
 <div class="project-overlay" id="overlay-graphicdesign" role="dialog" aria-modal="true">
   <div class="overlay-nav">
@@ -2077,34 +2215,33 @@ footer {
   </div>
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Parlez — Campaign</div>
-    <video autoplay muted loop playsinline style="width:100%;max-height:65vh;object-fit:cover;display:block;">
-      <source src="projects/graphicsgallery/Parlezcommercial-web.mp4" type="video/mp4">
-    </video>
-    <div class="overlay-grid" style="margin-top:16px;">
+    <div class="overlay-grid">
+      <div class="overlay-grid-item"><video autoplay muted loop playsinline><source src="projects/graphicsgallery/Parlezcommercial-web.mp4" type="video/mp4"></video></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/parlezad.jpg" alt=""><span>Parlez ad</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/phoneparez.png" alt=""><span>Parlez phone mockup</span></div>
     </div>
 
     <div class="overlay-gallery-title">Editorial &amp; Film</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><span>Film poster — This is not a Commercial</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg" alt=""><span>Film poster — This is not a Commercial</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/LiottaP_Project1Part3.jpg" alt=""><span>Editorial project</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/printfilmmm.jpg" alt=""><span>Print film</span></div>
     </div>
 
     <div class="overlay-gallery-title">Sports Poster Series</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Messi%20Poster.jpg" alt=""><span>Messi</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/messi-finalized.jpg" alt="Messi poster"><span>Messi — final poster</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Messi%20Poster.jpg" alt=""><span>Messi — mockup</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/Mbappe.jpg" alt=""><span>Mbappé</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/Ronaldo.jpg" alt=""><span>Ronaldo</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/MessiPrinted.jpg" alt=""><span>Messi — printed</span></div>
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/graphicsgallery/IDOLSSERIES.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><span>Idols series</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/IDOLSSERIES.jpg" alt=""><span>Idols series</span></div>
     </div>
 
     <div class="overlay-gallery-title">Branding &amp; Identity</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/graphicsgallery/IRL%20STATION.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><span>IRL Station</span></div>
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/graphicsgallery/IRLSTATION2.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><span>IRL Station 2</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/IRL%20STATION.jpg" alt=""><span>IRL Station</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/IRLSTATION2.jpg" alt=""><span>IRL Station 2</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/nametag.jpg" alt=""><span>Name tag</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/app.jpg" alt=""><span>App design</span></div>
     </div>
@@ -2113,12 +2250,12 @@ footer {
     <div class="overlay-grid">
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/CeraVeBoxBluue.jpg" alt=""><span>CeraVe box</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/CeraVeMockupwgirl.jpg" alt=""><span>CeraVe mockup</span></div>
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:auto;"><img src="projects/graphicsgallery/Artboard%2042.jpg" alt="" style="width:100%;object-fit:contain;"><span>Artboard 42</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Artboard%2042.jpg" alt="" style="object-fit:contain;"><span>Artboard 42</span></div>
     </div>
 
     <div class="overlay-gallery-title">Adidas</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/graphicsgallery/adida%20mockups%207.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><span>Adidas mockups</span></div>
+      <div class="overlay-grid-item"><img src="projects/graphicsgallery/adida%20mockups%207.jpg" alt=""><span>Adidas mockups</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/adidasmockup3.jpg" alt=""><span>Adidas mockup 3</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/seminarmockup.jpeg" alt=""><span>Seminar mockup</span></div>
       <div class="overlay-grid-item"><img src="projects/graphicsgallery/stickers.jpg" alt=""><span>Stickers</span></div>
@@ -2166,36 +2303,22 @@ footer {
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Editorial spreads</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/diesel/frontback.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><span>Front &amp; back</span></div>
+      <div class="overlay-grid-item"><img src="projects/diesel/frontback.jpg" alt=""><span>Front &amp; back</span></div>
       <div class="overlay-grid-item"><img src="projects/diesel/diesel121.webp" alt=""><span>Spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Diesel3.webp" alt=""><span>Spread 3</span></div>
       <div class="overlay-grid-item"><img src="projects/diesel/DieselBW.webp" alt=""><span>B&amp;W spread</span></div>
       <div class="overlay-grid-item"><img src="projects/diesel/Diesel+Magazine+girl+holding+.webp" alt=""><span>Editorial</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Colophon.webp" alt=""><span>Colophon</span></div>
       <div class="overlay-grid-item"><img src="projects/diesel/Dieselcollection.webp" alt=""><span>Collection</span></div>
       <div class="overlay-grid-item"><img src="projects/diesel/Unzip+the+look.webp" alt=""><span>Campaign</span></div>
     </div>
-    <div class="overlay-gallery-title" style="margin-top:48px;">The book</div>
-    <div class="overlay-grid">
-      <div class="overlay-grid-item" style="grid-column:1/-1;aspect-ratio:16/9;"><img src="projects/diesel/Screenshot 2026-04-22 at 22.55.27.png" alt="" style="width:100%;height:100%;object-fit:cover;"><span>Cover spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Screenshot 2026-04-22 at 22.55.39.png" alt=""><span>Spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Screenshot 2026-04-22 at 22.55.55.png" alt=""><span>Spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Screenshot 2026-04-22 at 22.56.52.png" alt=""><span>Spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Screenshot 2026-04-22 at 22.58.17.png" alt=""><span>Spread</span></div>
-    </div>
-    <div style="padding:32px 48px 0;">
+    <div style="padding:32px 0 0;">
       <a href="projects/diesel/SAV_202420_GRDS348_PilarLiotta_Brand_Communications_Social_Media.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);text-decoration:none;padding:14px 20px;border:1px solid var(--border);transition:background 0.2s,border-color 0.2s;">View full PDF <span style="color:var(--accent);">→</span></a>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Mockups</div>
     <div class="overlay-grid">
       <div class="overlay-grid-item"><img src="projects/diesel/DieselMockup.webp" alt=""><span>Magazine mockup</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/diesel+mockup2.webp" alt=""><span>Mockup 2</span></div>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Social</div>
-    <video autoplay muted loop playsinline style="width:100%;max-height:65vh;object-fit:cover;display:block;">
-      <source src="projects/diesel/ScreenRecording_02-07-2026 21-53-12_1-web.mp4" type="video/mp4">
-    </video>
-    <div class="overlay-grid" style="margin-top:16px;">
+    <div class="overlay-grid">
       <div class="overlay-grid-item"><img src="projects/diesel/DieselInstagram.webp" alt=""><span>Instagram</span></div>
       <div class="overlay-grid-item"><img src="projects/diesel/dieselinstaotherpart2.jpg" alt=""><span>Instagram 2</span></div>
     </div>
