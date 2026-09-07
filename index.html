@@ -57,6 +57,19 @@ body {
 }
 .cursor.plus .cursor-glyph { transform: scale(2.2); }
 
+/* CURSOR GHOST TRAIL */
+.cursor-ghost {
+  position: fixed;
+  width: 48px; height: 48px;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%,-50%);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  will-change: left, top;
+}
+.cursor-ghost .cursor-glyph { font-size: 42px; line-height: 1; }
+
 /* NAV */
 nav {
   position: fixed;
@@ -2473,13 +2486,52 @@ footer {
 
 <!-- ═══════════════════════════════════ JS ═══════════════════════════════════ -->
 <script>
-// Star cursor
+// Star cursor — eases toward the pointer so it trails slightly behind
 const cursor = document.getElementById('cursor');
-let rafId = null, cx = 0, cy = 0;
-function renderCursor() { cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px'; rafId = null; }
+let tx = 0, ty = 0, cx = 0, cy = 0, cursorRAF = null, cursorInit = false;
+const CURSOR_EASE = 0.16; // lower = more trail/lag, higher = tighter to the pointer
+
+// Faint ghost skulls that stream behind the cursor
+const GHOST_COUNT = 5;   // how many trailing skulls
+const GHOST_EASE = 0.32; // how tightly each ghost tracks the one ahead of it
+const ghosts = [];
+for (let i = 0; i < GHOST_COUNT; i++) {
+  const g = document.createElement('div');
+  g.className = 'cursor-ghost';
+  g.innerHTML = '<span class="cursor-glyph">☠︎︎</span>';
+  g.style.opacity = (0.22 * (1 - i / GHOST_COUNT)).toFixed(3); // fade out toward the tail
+  document.body.appendChild(g);
+  ghosts.push({ el: g, x: 0, y: 0 });
+}
+
+function renderCursor() {
+  cx += (tx - cx) * CURSOR_EASE;
+  cy += (ty - cy) * CURSOR_EASE;
+  cursor.style.left = cx + 'px';
+  cursor.style.top = cy + 'px';
+
+  let px = cx, py = cy;
+  for (const g of ghosts) {
+    g.x += (px - g.x) * GHOST_EASE;
+    g.y += (py - g.y) * GHOST_EASE;
+    g.el.style.left = g.x + 'px';
+    g.el.style.top = g.y + 'px';
+    px = g.x; py = g.y;
+  }
+
+  const tail = ghosts[ghosts.length - 1];
+  const moving = Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1
+    || Math.abs(cx - tail.x) > 0.1 || Math.abs(cy - tail.y) > 0.1;
+  cursorRAF = moving ? requestAnimationFrame(renderCursor) : null;
+}
 document.addEventListener('mousemove', e => {
-  cx = e.clientX; cy = e.clientY;
-  if (!rafId) rafId = requestAnimationFrame(renderCursor);
+  tx = e.clientX; ty = e.clientY;
+  if (!cursorInit) { // first move: drop cursor + ghosts in place, no glide from corner
+    cx = tx; cy = ty;
+    for (const g of ghosts) { g.x = tx; g.y = ty; }
+    cursorInit = true;
+  }
+  if (!cursorRAF) cursorRAF = requestAnimationFrame(renderCursor);
 }, { passive: true });
 document.querySelectorAll('a, button, .featured-item, .project-card, .overlay-next').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('big'));
