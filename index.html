@@ -20,6 +20,7 @@
   font-family: 'Geist Pixel';
   src: url('fonts/GeistPixel-Regular-VariableFont_ELSH.ttf') format('truetype');
   font-weight: 100 900;
+  font-display: swap;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -487,11 +488,13 @@ footer {
   transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1);
   overflow-y: auto;
   overflow-x: hidden;
+  content-visibility: hidden;
 }
 .project-overlay.open {
   opacity: 1;
   pointer-events: auto;
   border-top: 3px solid var(--accent);
+  content-visibility: visible;
 }
 
 .overlay-nav {
@@ -650,10 +653,11 @@ footer {
 .p-arrow.prev { left:12px; }
 .p-arrow.next { right:12px; }
 
-/* World Cup Series — portrait posters, no crop */
+/* World Cup Series — mixed orientations, no crop, bars blend into page */
 #overlay-worldcup .overlay-grid-item {
   aspect-ratio: 4/3;
-  background: #0d0d0d;
+  background: var(--bg);
+  border: 1px solid var(--border);
 }
 #overlay-worldcup .overlay-grid-item:first-child {
   grid-column: 1;
@@ -661,6 +665,9 @@ footer {
 }
 #overlay-worldcup .overlay-grid-item img {
   object-fit: contain;
+}
+#overlay-worldcup .overlay-grid-item span {
+  color: var(--muted);
 }
 
 /* Cyanotype — portrait grid, no crop */
@@ -845,15 +852,18 @@ footer {
   </div>
   <div class="hero-right" id="heroRight">
     <div class="hero-slide active">
-      <video src="projects/diesel/DieselFinaledited-web.mp4" autoplay muted loop playsinline></video>
+      <video preload="none" src="projects/diesel/DieselFinaledited-web.mp4" autoplay muted loop playsinline></video>
     </div>
     <div class="hero-slide">
-      <video src="projects/touchdesigner/touchdesigner-web.mp4" autoplay muted loop playsinline></video>
+      <video preload="none" src="projects/touchdesigner/touchdesigner-web.mp4" autoplay muted loop playsinline></video>
     </div>
     <div class="hero-slide" style="background-image:url('projects/andwalsh/andwalsh.jpeg')"></div>
     <div class="hero-slide" style="background-image:url('projects/rockinrio/poster1.png')"></div>
     <div class="hero-slide" style="background-image:url('projects/replicants/IMG_9921.webp')"></div>
-    <div class="hero-slide" style="background-image:url('projects/chastain/chastainprocess/main%20logo.png');background-size:contain;background-repeat:no-repeat;background-color:#f5f0ea;"></div>
+    <div class="hero-slide" style="background-image:url('projects/sophieharrisphoto/logo-distort-3-web.jpg');background-size:cover;background-position:center;"></div>
+    <div class="hero-slide">
+      <video preload="none" src="projects/blender/flux-web.mp4" autoplay muted loop playsinline></video>
+    </div>
     <div class="hero-slide-bar"></div>
     <div class="hero-slide-dots" id="slideDots">
       <div class="hero-dot active"></div>
@@ -949,7 +959,7 @@ footer {
 
     <!-- TouchDesigner — video card -->
     <div class="featured-item feat-touchdesigner" onclick="openOverlay('touchdesigner')">
-      <video autoplay muted loop playsinline src="projects/touchdesigner/touchdesigner.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"></video>
+      <video preload="none" autoplay muted loop playsinline src="projects/touchdesigner/touchdesigner-web.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"></video>
       <div class="featured-overlay" style="z-index:1;"></div>
       <div class="featured-info" style="z-index:2;">
         <span class="featured-tag">Interactive · Generative · 2025</span>
@@ -978,7 +988,7 @@ footer {
 <section class="section" style="padding-top:0;">
   <div class="section-header">
     <h2 class="section-title">All<br><em>Projects</em></h2>
-    <span class="section-count">17 projects</span>
+    <span class="section-count">18 projects</span>
   </div>
   <div class="projects-grid">
     <div class="project-card" onclick="openOverlay('sophieharrisphoto')">
@@ -1030,6 +1040,11 @@ footer {
       <div class="project-card-bg" style="background-image:url('projects/mixmedia/0d14cace-f903-435c-9acd-c1f9c9495e2e-0.webp');"></div>
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Photos &amp; Video · 2025</div><div class="project-card-name">Personal Gallery</div></div>
+    </div>
+    <div class="project-card" onclick="openOverlay('blender')">
+      <div class="project-card-bg" style="background-image:url('projects/blender/flux-poster.jpg');background-color:#000;"></div>
+      <div class="project-card-overlay"></div>
+      <div class="project-card-info"><div class="project-card-label">3D · Motion · 2025</div><div class="project-card-name">Blender Experiments</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('taragui')">
       <div class="project-card-bg" style="background-image:url('projects/taragui/holdingmate.webp');"></div>
@@ -1124,7 +1139,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img" style="background:#f5f0ea;">
       <div class="overlay-hero-img-inner">
-        <img src="projects/chastain/chastainprocess/main logo.png" alt="Chastain Horse Park logo" style="object-fit:contain;padding:40px;">
+        <img loading="lazy" decoding="async" src="projects/chastain/chastainprocess/main logo.png" alt="Chastain Horse Park logo" style="object-fit:contain;padding:40px;">
       </div>
     </div>
     <div class="overlay-hero-content">
@@ -1146,28 +1161,28 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Logo system</div>
     <div class="overlay-grid" style="margin-bottom:2px;">
-      <div class="overlay-grid-item" style="background:#f5f0ea;aspect-ratio:4/3;"><img src="projects/chastain/chastainprocess/logowithothers.png" alt="Chastain logo system — main and wayfinding variants" style="object-fit:contain;padding:24px;"></div>
+      <div class="overlay-grid-item" style="background:#f5f0ea;aspect-ratio:4/3;"><img loading="lazy" decoding="async" src="projects/chastain/chastainprocess/logowithothers.png" alt="Chastain logo system — main and wayfinding variants" style="object-fit:contain;padding:24px;"></div>
     </div>
 
     <div class="overlay-gallery-title" style="margin-top:48px;">Website Walkthrough</div>
     <div style="width:100%; margin-bottom:64px;">
-      <video src="projects/chastain/chastain-website.mp4" controls muted playsinline style="width:100%; border:1px solid var(--border); display:block; background:#000;"></video>
+      <video preload="none" src="projects/chastain/chastain-website.mp4" controls muted playsinline style="width:100%; border:1px solid var(--border); display:block; background:#000;"></video>
       <span style="font-family:var(--mono); font-size:9px; color:var(--muted); margin-top:8px; text-transform:uppercase; letter-spacing:0.1em; display:block;">Interactive Prototype · Navigation & Layout Walkthrough</span>
     </div>
 
     <div class="overlay-gallery-title" style="margin-top:48px;">Selected work</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/chastain/parkviewer.webp" alt="Therapeutic Horsemanship interpretive sign — laser cut on wood, SCAD SERVE"><span>Therapeutic Horsemanship sign · SCAD FASH 2024</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/ChastainPoloShirt_RegularWoodBackground.webp" alt=""><span>Polo shirt</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/doormockup.webp" alt=""><span>Signage</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/fannypack.webp" alt=""><span>Merchandise</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/Hand+Holding+Metal+Mug.webp" alt=""><span>Mug</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/ChastainPoloShirtTherapy.webp" alt=""><span>Therapy variant</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/chastain2.webp" alt=""><span>Identity</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/chastainprocess/presenting.png" alt="Presenting at SCAD FASH 2024"><span>SCAD FASH 2024 presentation</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/pickuptruckmockup.webp" alt=""><span>Vehicle wrap</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/Stamp.webp" alt=""><span>Stamp</span></div>
-      <div class="overlay-grid-item"><img src="projects/chastain/Phone.webp" alt=""><span>Social media</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/parkviewer.webp" alt="Therapeutic Horsemanship interpretive sign — laser cut on wood, SCAD SERVE"><span>Therapeutic Horsemanship sign · SCAD FASH 2024</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/ChastainPoloShirt_RegularWoodBackground.webp" alt=""><span>Polo shirt</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/doormockup.webp" alt=""><span>Signage</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/fannypack.webp" alt=""><span>Merchandise</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/Hand+Holding+Metal+Mug.webp" alt=""><span>Mug</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/ChastainPoloShirtTherapy.webp" alt=""><span>Therapy variant</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/chastain2.webp" alt=""><span>Identity</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/chastainprocess/presenting.png" alt="Presenting at SCAD FASH 2024"><span>SCAD FASH 2024 presentation</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/pickuptruckmockup.webp" alt=""><span>Vehicle wrap</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/Stamp.webp" alt=""><span>Stamp</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/chastain/Phone.webp" alt=""><span>Social media</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1192,7 +1207,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/andwalsh/andwalsh.jpeg" alt="Walsh book">
+        <img loading="lazy" decoding="async" src="projects/andwalsh/andwalsh.jpeg" alt="Walsh book">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -1213,12 +1228,18 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Selected work</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/andwalsh/edited2.webp" alt=""><span>Edited spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/andwalsh/editedbook.webp" alt=""><span>Book cover</span></div>
-      <div class="overlay-grid-item"><img src="projects/andwalsh/IMG_5467.webp" alt=""><span>Interior</span></div>
-      <div class="overlay-grid-item"><img src="projects/andwalsh/IMG_5478.webp" alt=""><span>Detail</span></div>
-      <div class="overlay-grid-item"><img src="projects/andwalsh/IMG_5468.webp" alt=""><span>Layout</span></div>
-      <div class="overlay-grid-item"><img src="projects/andwalsh/IMG_5487.webp" alt=""><span>Pages</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/edited2.webp" alt=""><span>Edited spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/editedbook.webp" alt=""><span>Book cover</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5467.webp" alt=""><span>Interior</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5478.webp" alt=""><span>Detail</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5468.webp" alt=""><span>Layout</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5487.webp" alt=""><span>Pages</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5503.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5566.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5498.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5489.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5538.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/andwalsh/IMG_5540.webp" alt=""><span>Spread</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1242,7 +1263,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/rockinrio/rockinrioprocess/Final+Logo.webp" alt="Rock in Rio final logo">
+        <img loading="lazy" decoding="async" src="projects/rockinrio/rockinrioprocess/Final+Logo.webp" alt="Rock in Rio final logo">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -1264,31 +1285,31 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Campaign video</div>
     <div style="width:100%;margin-bottom:2px;">
-      <video autoplay muted loop playsinline style="width:100%;max-height:65vh;object-fit:cover;display:block;">
+      <video preload="none" autoplay muted loop playsinline style="width:100%;max-height:65vh;object-fit:cover;display:block;">
         <source src="projects/rockinrio/rockinriowithsound-web.mp4" type="video/mp4">
       </video>
     </div>
 
     <div class="overlay-gallery-title" style="margin-top:48px;">App Prototype Walkthrough</div>
     <div style="width:100%; margin-bottom:64px;">
-      <video src="projects/rockinrio/rockinrio-app.mp4" controls muted playsinline style="width:100%; border:1px solid var(--border); display:block; background:#000;"></video>
+      <video preload="none" src="projects/rockinrio/rockinrio-app.mp4" controls muted playsinline style="width:100%; border:1px solid var(--border); display:block; background:#000;"></video>
       <span style="font-family:var(--mono); font-size:9px; color:var(--muted); margin-top:8px; text-transform:uppercase; letter-spacing:0.1em; display:block;">Interactive App Prototype · User Flow & Interface</span>
     </div>
 
     <div class="overlay-gallery-title" style="margin-top:48px;">Selected work</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/rockinrio/poster1.png" alt=""><span>Stage poster</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/poster2.png" alt=""><span>Stage poster 2</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/poster3.png" alt=""><span>Stage poster 3</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/texture.png" alt=""><span>Texture</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/shirt.png" alt=""><span>Shirt</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/merch.png" alt=""><span>Merchandise</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/merch2.png" alt=""><span>Merchandise 2</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/stickers.png" alt=""><span>Stickers</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/lanyard.png" alt=""><span>Lanyard</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/vip.png" alt=""><span>VIP pass</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/arm.png" alt=""><span>Applied</span></div>
-      <div class="overlay-grid-item"><img src="projects/rockinrio/insta.png" alt=""><span>Instagram</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/poster1.png" alt=""><span>Stage poster</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/poster2.png" alt=""><span>Stage poster 2</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/poster3.png" alt=""><span>Stage poster 3</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/texture.png" alt=""><span>Texture</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/shirt.png" alt=""><span>Shirt</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/merch.png" alt=""><span>Merchandise</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/merch2.png" alt=""><span>Merchandise 2</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/stickers.png" alt=""><span>Stickers</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/lanyard.png" alt=""><span>Lanyard</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/vip.png" alt=""><span>VIP pass</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/arm.png" alt=""><span>Applied</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/rockinrio/insta.png" alt=""><span>Instagram</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1312,7 +1333,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/replicants/IMG_9921.webp" alt="Replicants book">
+        <img loading="lazy" decoding="async" src="projects/replicants/IMG_9921.webp" alt="Replicants book">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -1333,12 +1354,12 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Selected work</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/replicants/IMG_9921.webp" alt=""><span>Book spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/replicants/IMG_9922.webp" alt=""><span>Detail</span></div>
-      <div class="overlay-grid-item"><img src="projects/replicants/IMG_9930.webp" alt=""><span>Material</span></div>
-      <div class="overlay-grid-item"><img src="projects/replicants/IMG_9951.webp" alt=""><span>Pages</span></div>
-      <div class="overlay-grid-item"><video src="projects/replicants/ATL_202420_GRDS353_A2_Motion_Liotta_P-web.mp4" autoplay muted loop playsinline></video><span>Motion piece</span></div>
-      <div class="overlay-grid-item"><img src="projects/replicants/IMG_9960.webp" alt=""><span>Cover</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/replicants/IMG_9921.webp" alt=""><span>Book spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/replicants/IMG_9922.webp" alt=""><span>Detail</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/replicants/IMG_9930.webp" alt=""><span>Material</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/replicants/IMG_9951.webp" alt=""><span>Pages</span></div>
+      <div class="overlay-grid-item"><video preload="none" src="projects/replicants/ATL_202420_GRDS353_A2_Motion_Liotta_P-web.mp4" autoplay muted loop playsinline></video><span>Motion piece</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/replicants/IMG_9960.webp" alt=""><span>Cover</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1362,7 +1383,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/touchdesigner/touchdesignerimage.png" alt="TouchDesigner still">
+        <img loading="lazy" decoding="async" src="projects/touchdesigner/touchdesignerimage.png" alt="TouchDesigner still">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -1384,31 +1405,31 @@ footer {
     <div class="overlay-gallery-title">Selected work — real-time generative visuals</div>
     <div class="overlay-grid">
       <div class="overlay-grid-item" style="grid-column:1/3; aspect-ratio:16/9;">
-        <video src="projects/touchdesigner/touchdesigner-web.mp4" autoplay muted loop playsinline></video>
+        <video preload="none" src="projects/touchdesigner/touchdesigner-web.mp4" autoplay muted loop playsinline></video>
         <span>Main piece</span>
       </div>
       <div class="overlay-grid-item">
-        <video src="projects/touchdesigner/gesturemeaning.mp4" autoplay muted loop playsinline></video>
+        <video preload="none" src="projects/touchdesigner/gesturemeaning.mp4" autoplay muted loop playsinline></video>
         <span>Gesture to meaning</span>
       </div>
       <div class="overlay-grid-item">
-        <video src="projects/touchdesigner/Travel.mp4" autoplay muted loop playsinline></video>
+        <video preload="none" src="projects/touchdesigner/Travel.mp4" autoplay muted loop playsinline></video>
         <span>Ocean</span>
       </div>
       <div class="overlay-grid-item">
-        <video src="projects/touchdesigner/project1.mp4" autoplay muted loop playsinline></video>
+        <video preload="none" src="projects/touchdesigner/project1.mp4" autoplay muted loop playsinline></video>
         <span>Project 1</span>
       </div>
       <div class="overlay-grid-item">
-        <video src="projects/touchdesigner/Project2VideoClip.mp4" autoplay muted loop playsinline></video>
+        <video preload="none" src="projects/touchdesigner/Project2VideoClip.mp4" autoplay muted loop playsinline></video>
         <span>Project 2</span>
       </div>
       <div class="overlay-grid-item">
-        <video src="projects/touchdesigner/Project3.mp4" autoplay muted loop playsinline></video>
+        <video preload="none" src="projects/touchdesigner/Project3.mp4" autoplay muted loop playsinline></video>
         <span>Project 3</span>
       </div>
       <div class="overlay-grid-item" style="grid-column:1/3; aspect-ratio:16/9;">
-        <video src="projects/touchdesigner/FinalProjectClip-web.mp4" autoplay muted loop playsinline></video>
+        <video preload="none" src="projects/touchdesigner/FinalProjectClip-web.mp4" autoplay muted loop playsinline></video>
         <span>Final Project</span>
       </div>
     </div>
@@ -1434,7 +1455,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/perception/perception_documentation_Page_12.png" alt="Perception installation">
+        <img loading="lazy" decoding="async" src="projects/perception/perception_documentation_Page_12.png" alt="Perception installation">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -1457,7 +1478,7 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Live Demo</div>
     <div style="width:100%; margin-bottom:64px;">
-      <video src="projects/perception/perceptionvideo-web.mp4" controls muted playsinline style="width:100%; border:1px solid var(--border); display:block;"></video>
+      <video preload="none" src="projects/perception/perceptionvideo-web.mp4" controls muted playsinline style="width:100%; border:1px solid var(--border); display:block;"></video>
       <span style="font-family:var(--mono); font-size:9px; color:var(--muted); margin-top:8px; text-transform:uppercase; letter-spacing:0.1em; display:block;">MIT Reality Hack 2026 · Full Demo</span>
     </div>
 
@@ -1488,7 +1509,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/meta/clip.png" alt="Instagram Brand Imagery — Meta" style="object-fit:cover;">
+        <img loading="lazy" decoding="async" src="projects/meta/clip.png" alt="Instagram Brand Imagery — Meta" style="object-fit:cover;">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -1510,19 +1531,19 @@ footer {
     <div class="overlay-gallery-title">Selected work — Instagram @creators</div>
     <div class="overlay-grid" style="grid-template-columns: repeat(2, 1fr);">
       <div class="overlay-grid-item" style="aspect-ratio:1/1;">
-        <img src="projects/meta/IMG_9509.PNG" alt="Feel it, film it, see it">
+        <img loading="lazy" decoding="async" src="projects/meta/IMG_9509.PNG" alt="Feel it, film it, see it">
         <span>Feel it, film it, see it</span>
       </div>
       <div class="overlay-grid-item" style="aspect-ratio:1/1;">
-        <img src="projects/meta/IMG_9510.PNG" alt="Feel it, film it, see it">
+        <img loading="lazy" decoding="async" src="projects/meta/IMG_9510.PNG" alt="Feel it, film it, see it">
         <span>Feel it, film it, see it</span>
       </div>
       <div class="overlay-grid-item" style="aspect-ratio:1/1;">
-        <img src="projects/meta/IMG_9511.PNG" alt="Feel it, film it, see it">
+        <img loading="lazy" decoding="async" src="projects/meta/IMG_9511.PNG" alt="Feel it, film it, see it">
         <span>Feel it, film it, see it</span>
       </div>
       <div class="overlay-grid-item" style="aspect-ratio:1/1;">
-        <img src="projects/meta/IMG_8622.jpeg" alt="Edits — Duration Controls">
+        <img loading="lazy" decoding="async" src="projects/meta/IMG_8622.jpeg" alt="Edits — Duration Controls">
         <span>Edits — Duration Controls on Transitions</span>
       </div>
     </div>
@@ -1548,7 +1569,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/vsco/IMG_5239.webp" alt="VSCO"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/vsco/IMG_5239.webp" alt="VSCO"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -1567,13 +1588,13 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Selected edits</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item" style="grid-column: 1 / 3;"><img src="projects/vsco/VSCO+Valentines.webp" alt="VSCO Valentine's Day newsletter feature"><span>Valentine's Day feature</span></div>
-      <div class="overlay-grid-item"><img src="projects/vsco/IMG_5239.webp" alt=""><span>01</span></div>
-      <div class="overlay-grid-item"><img src="projects/vsco/IMG_5260.webp" alt=""><span>02</span></div>
-      <div class="overlay-grid-item"><img src="projects/vsco/IMG_5261.webp" alt=""><span>03</span></div>
-      <div class="overlay-grid-item"><img src="projects/vsco/IMG_5262.webp" alt=""><span>04</span></div>
-      <div class="overlay-grid-item"><img src="projects/vsco/IMG_5263.webp" alt=""><span>05</span></div>
-      <div class="overlay-grid-item"><img src="projects/vsco/IMG_5260-1.webp" alt=""><span>06</span></div>
+      <div class="overlay-grid-item" style="grid-column: 1 / 3;"><img loading="lazy" decoding="async" src="projects/vsco/VSCO+Valentines.webp" alt="VSCO Valentine's Day newsletter feature"><span>Valentine's Day feature</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/vsco/IMG_5239.webp" alt=""><span>01</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/vsco/IMG_5260.webp" alt=""><span>02</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/vsco/IMG_5261.webp" alt=""><span>03</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/vsco/IMG_5262.webp" alt=""><span>04</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/vsco/IMG_5263.webp" alt=""><span>05</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/vsco/IMG_5260-1.webp" alt=""><span>06</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1591,7 +1612,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/sophieharrisphoto/logo-distort-2.png" alt="Sophie Harris Photo logo" style="object-fit:contain; background:#fff;">
+        <img loading="lazy" decoding="async" src="projects/sophieharrisphoto/logo-distort-2.png" alt="Sophie Harris Photo logo" style="object-fit:contain; background:#fff;">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -1615,19 +1636,19 @@ footer {
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:64px;">
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="aspect-ratio:1/1; background:#fff; border:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:16px;">
-          <img src="projects/sophieharrisphoto/logo-og.png" alt="Original logo" style="width:100%; height:100%; object-fit:contain;">
+          <img loading="lazy" decoding="async" src="projects/sophieharrisphoto/logo-og.png" alt="Original logo" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Original</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="aspect-ratio:1/1; background:#fff; border:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:16px;">
-          <img src="projects/sophieharrisphoto/logo-distort-1.png" alt="Distort strength 1" style="width:100%; height:100%; object-fit:contain;">
+          <img loading="lazy" decoding="async" src="projects/sophieharrisphoto/logo-distort-1.png" alt="Distort strength 1" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Strength 01</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="aspect-ratio:1/1; background:#fff; border:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:16px;">
-          <img src="projects/sophieharrisphoto/logo-distort-2.png" alt="Distort strength 2" style="width:100%; height:100%; object-fit:contain;">
+          <img loading="lazy" decoding="async" src="projects/sophieharrisphoto/logo-distort-2.png" alt="Distort strength 2" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Strength 02</span>
       </div>
@@ -1635,26 +1656,26 @@ footer {
 
     <div class="overlay-gallery-title">Brand pattern</div>
     <div style="width:100%; margin-bottom:64px;">
-      <img src="projects/sophieharrisphoto/pattern.png" alt="Brand pattern" style="width:100%; display:block; border:1px solid var(--border);">
+      <img loading="lazy" decoding="async" src="projects/sophieharrisphoto/pattern.png" alt="Brand pattern" style="width:100%; display:block; border:1px solid var(--border);">
     </div>
 
     <div class="overlay-gallery-title">Merchandise mockups</div>
     <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:64px;">
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="aspect-ratio:1/1; background:#f2f2f2; border:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <img src="projects/sophieharrisphoto/Cap_01.png" alt="Cap front" style="width:100%; height:100%; object-fit:contain;">
+          <img loading="lazy" decoding="async" src="projects/sophieharrisphoto/Cap_01.png" alt="Cap front" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Cap — front</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="aspect-ratio:1/1; background:#f2f2f2; border:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <img src="projects/sophieharrisphoto/Cap_03.png" alt="Cap side" style="width:100%; height:100%; object-fit:contain;">
+          <img loading="lazy" decoding="async" src="projects/sophieharrisphoto/Cap_03.png" alt="Cap side" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Cap — side</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px; grid-column:1/-1;">
         <div style="aspect-ratio:16/9; background:#f2f2f2; border:1px solid var(--border); overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <img src="projects/sophieharrisphoto/shirt.png" alt="Shirt mockup" style="width:100%; height:100%; object-fit:contain;">
+          <img loading="lazy" decoding="async" src="projects/sophieharrisphoto/shirt.png" alt="Shirt mockup" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Shirt — front &amp; back</span>
       </div>
@@ -1664,19 +1685,19 @@ footer {
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:64px;">
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border); background:#000;">
-          <video src="projects/sophieharrisphoto/sophiemotion.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>
+          <video preload="none" src="projects/sophieharrisphoto/sophiemotion.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Motion 01</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border); background:#000;">
-          <video src="projects/sophieharrisphoto/sophiemotion2_compressed.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>
+          <video preload="none" src="projects/sophieharrisphoto/sophiemotion2_compressed.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Motion 02</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div style="aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border); background:#000;">
-          <video src="projects/sophieharrisphoto/sophiemotion3_compressed.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>
+          <video preload="none" src="projects/sophieharrisphoto/sophiemotion3_compressed.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>
         </div>
         <span style="font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Motion 03</span>
       </div>
@@ -1702,7 +1723,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/taragui/holdingmate.webp" alt="Taragui"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/taragui/holdingmate.webp" alt="Taragui"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -1721,18 +1742,18 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Campaign video</div>
     <div style="width:100%;margin-bottom:2px;">
-      <video autoplay muted loop playsinline style="width:100%;max-height:65vh;object-fit:cover;display:block;">
+      <video preload="none" autoplay muted loop playsinline style="width:100%;max-height:65vh;object-fit:cover;display:block;">
         <source src="projects/taragui/taragui-web.mp4" type="video/mp4">
       </video>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Selected work</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/taragui/holdingmate.webp" alt=""><span>Holding mate</span></div>
-      <div class="overlay-grid-item"><img src="projects/taragui/Mate+Cocido.webp" alt=""><span>Mate cocido</span></div>
-      <div class="overlay-grid-item"><img src="projects/taragui/nuevotaragui.webp" alt=""><span>New packaging</span></div>
-      <div class="overlay-grid-item"><img src="projects/taragui/taragui+ad.webp" alt=""><span>Campaign</span></div>
-      <div class="overlay-grid-item"><img src="projects/taragui/termo.webp" alt=""><span>Termo</span></div>
-      <div class="overlay-grid-item"><img src="projects/taragui/tote.webp" alt=""><span>Tote</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/taragui/holdingmate.webp" alt=""><span>Holding mate</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/taragui/Mate+Cocido.webp" alt=""><span>Mate cocido</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/taragui/nuevotaragui.webp" alt=""><span>New packaging</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/taragui/taragui+ad.webp" alt=""><span>Campaign</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/taragui/termo.webp" alt=""><span>Termo</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/taragui/tote.webp" alt=""><span>Tote</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1749,7 +1770,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp" alt="Gallery Anderson"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp" alt="Gallery Anderson"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -1769,20 +1790,20 @@ footer {
     <div class="overlay-gallery-title">Video</div>
     <div class="overlay-grid">
       <div class="overlay-grid-item" style="aspect-ratio:9/16;background:#111;">
-        <video src="projects/galleryanderson/gallery-anderson-1-web.mp4" controls playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></video>
+        <video preload="none" src="projects/galleryanderson/gallery-anderson-1-web.mp4" controls playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></video>
       </div>
       <div class="overlay-grid-item" style="aspect-ratio:9/16;background:#111;">
-        <video src="projects/galleryanderson/gallery-anderson-2-web.mp4" controls playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></video>
+        <video preload="none" src="projects/galleryanderson/gallery-anderson-2-web.mp4" controls playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></video>
       </div>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Selected work</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp" alt=""><span>Film festival</span></div>
-      <div class="overlay-grid-item"><img src="projects/galleryanderson/DandywGrainNew.webp" alt=""><span>Dandy w/ grain</span></div>
-      <div class="overlay-grid-item"><img src="projects/galleryanderson/FocusExhibition3.webp" alt=""><span>Focus exhibition</span></div>
-      <div class="overlay-grid-item"><img src="projects/galleryanderson/blob-6.webp" alt=""><span>Event design</span></div>
-      <div class="overlay-grid-item"><img src="projects/galleryanderson/blob-8.webp" alt=""><span>Promo</span></div>
-      <div class="overlay-grid-item"><img src="projects/galleryanderson/SpringFlingArtThang.webp" alt=""><span>Spring Fling</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/galleryanderson/ArtandCinema-AtlantaJewishFilmFestival.webp" alt=""><span>Film festival</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/galleryanderson/DandywGrainNew.webp" alt=""><span>Dandy w/ grain</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/galleryanderson/FocusExhibition3.webp" alt=""><span>Focus exhibition</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/galleryanderson/blob-6.webp" alt=""><span>Event design</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/galleryanderson/blob-8.webp" alt=""><span>Promo</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/galleryanderson/SpringFlingArtThang.webp" alt=""><span>Spring Fling</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1799,7 +1820,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/dataportrait/dataportrait.jpg" alt="Data Portrait"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/dataportrait/dataportrait.jpg" alt="Data Portrait"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -1833,7 +1854,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/experimentalclock/experimentalclock.jpg" alt="Experimental Clock"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/experimentalclock/experimentalclock.jpg" alt="Experimental Clock"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -1867,7 +1888,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/colorball/colorball.jpg" alt="Color Ball"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/colorball/colorball.jpg" alt="Color Ball"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -1901,7 +1922,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/perfection/IMG_5141.webp" alt="Baskerville book"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5141.webp" alt="Baskerville book"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -1920,26 +1941,26 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">The typeface</div>
     <div style="width:100%;margin-bottom:2px;">
-      <video controls style="width:100%;max-height:65vh;object-fit:cover;display:block;background:#000;">
+      <video preload="none" controls style="width:100%;max-height:65vh;object-fit:cover;display:block;background:#000;">
         <source src="projects/perfection/perfectionvideowithsound-web.mp4" type="video/mp4">
       </video>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">The book</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5141.webp" alt=""><span>Cover</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5146.webp" alt=""><span>Spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5148.webp" alt=""><span>Detail</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5149.webp" alt=""><span>Pages</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5151.webp" alt=""><span>Spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5152.webp" alt=""><span>Typography</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5153.webp" alt=""><span>Detail</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5154.webp" alt=""><span>Layout</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5156.webp" alt=""><span>Pages</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5159.webp" alt=""><span>Spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5162.webp" alt=""><span>Detail</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5167.webp" alt=""><span>Pages</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5173.webp" alt=""><span>Baskerville's History</span></div>
-      <div class="overlay-grid-item"><img src="projects/perfection/IMG_5174.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5141.webp" alt=""><span>Cover</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5146.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5148.webp" alt=""><span>Detail</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5149.webp" alt=""><span>Pages</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5151.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5152.webp" alt=""><span>Typography</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5153.webp" alt=""><span>Detail</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5154.webp" alt=""><span>Layout</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5156.webp" alt=""><span>Pages</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5159.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5162.webp" alt=""><span>Detail</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5167.webp" alt=""><span>Pages</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5173.webp" alt=""><span>Baskerville's History</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/perfection/IMG_5174.webp" alt=""><span>Spread</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -1956,7 +1977,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/opticalillusion/opticalillusion.jpg" alt="Optical Illusion"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/opticalillusion/opticalillusion.jpg" alt="Optical Illusion"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -1990,7 +2011,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/mixmedia/IMG_2801+2.webp" alt="Personal gallery"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_2801+2.webp" alt="Personal gallery"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -2009,75 +2030,111 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Digital &amp; mixed media</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/mixmedia/laterneverexists.jpeg" alt="Later Never Exists"></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_2801+2.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_2802.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_2804.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/dreamsred.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/haappy.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/dealthecards-VSCO.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/ValentinaEDIT.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/cfa7191a-23d1-4a86-8833-f5748d3e64f6-0.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/CDABA5E8-47CF-4680-A64E-56A2151DBDBE_1_105_c.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/laterneverexists.jpeg" alt="Later Never Exists"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_2801+2.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_2802.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_2804.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/dreamsred.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/haappy.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/dealthecards-VSCO.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/ValentinaEDIT.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/cfa7191a-23d1-4a86-8833-f5748d3e64f6-0.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/CDABA5E8-47CF-4680-A64E-56A2151DBDBE_1_105_c.webp" alt=""></div>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Photography</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-1.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-2.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-3.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-4.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-5.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-6.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-7.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-8.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-9.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-10.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/bw-11.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_2482.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_2484.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_3039.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_3041.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_3042.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_3043.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_3044+2.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_5265.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_8724.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_8725.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_8726.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_8729.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/IMG_A1842922F28D-1.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/Photo_2025-02-15_163135.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/Photo_2025-02-15_163352.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/Photo_2025-02-15_163545.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/Photo_2025-02-15_163645.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_011224-1.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_011225-1.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_011225.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_021424.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_022423-1.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_032623-1.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_041222.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_041522.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_043024.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_051423-1.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_051423.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_052923.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_061722-1.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_070523.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_080124.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_090522.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_092523.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_101824.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_111023.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_121624.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_121723-4.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_121723-5.webp" alt=""></div>
-      <div class="overlay-grid-item"><img src="projects/mixmedia/vsco_121723.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-2.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-3.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-4.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-5.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-6.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-7.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-8.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-9.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-10.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/bw-11.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_2482.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_2484.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_3039.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_3041.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_3042.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_3043.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_3044+2.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_5265.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_8724.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_8725.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_8726.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_8729.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/IMG_A1842922F28D-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/Photo_2025-02-15_163135.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/Photo_2025-02-15_163352.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/Photo_2025-02-15_163545.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/Photo_2025-02-15_163645.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_011224-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_011225-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_011225.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_021424.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_022423-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_032623-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_041222.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_041522.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_043024.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_051423-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_051423.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_052923.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_061722-1.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_070523.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_080124.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_090522.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_092523.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_101824.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_111023.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_121624.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_121723-4.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_121723-5.webp" alt=""></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/mixmedia/vsco_121723.webp" alt=""></div>
     </div>
   </div>
   <div class="overlay-reflection">
     <div><h3 class="overlay-reflection-title">Work that<br>belongs to <em>me.</em></h3></div>
     <div><p class="overlay-reflection-body">Film photography, personal edits, and explorations that sit outside formal briefs. These images are where I find what I'm actually interested in.</p></div>
+  </div>
+</div>
+
+<!-- BLENDER EXPERIMENTS -->
+<div class="project-overlay" id="overlay-blender" role="dialog" aria-modal="true">
+  <div class="overlay-nav">
+    <button class="overlay-back" onclick="closeOverlay('blender')">Back to work</button>
+    <span class="overlay-title-small">Blender Experiments</span>
+  </div>
+  <div class="overlay-hero">
+    <div class="overlay-hero-img">
+      <div class="overlay-hero-img-inner" style="background:#000;"><video preload="none" src="projects/blender/flux-web.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video></div>
+      <div class="accent-bar"></div>
+    </div>
+    <div class="overlay-hero-content">
+      <div>
+        <div class="overlay-eyebrow">3D · Motion · 2025</div>
+        <h2 class="overlay-project-title">Blender<br><em>Experiments</em></h2>
+        <p class="overlay-desc">An ongoing set of short 3D and motion studies made in Blender — material, light, and typography tests rendered as loops. <em>FLUX</em> is the first: a liquid-chrome wordmark that melts and reforms through refraction and chromatic edges.</p>
+      </div>
+      <div class="overlay-meta-grid">
+        <div><div class="overlay-meta-label">Role</div><div class="overlay-meta-val">3D, Motion</div></div>
+        <div><div class="overlay-meta-label">Year</div><div class="overlay-meta-val">2025</div></div>
+        <div><div class="overlay-meta-label">Stack</div><div class="overlay-meta-val">Blender</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-gallery">
+    <div class="overlay-gallery-title">FLUX — liquid chrome type study</div>
+    <div class="overlay-grid">
+      <div class="overlay-grid-item" style="background:#000;"><video preload="none" src="projects/blender/flux-web.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"></video><span>FLUX · 2025</span></div>
+    </div>
+  </div>
+  <div class="overlay-reflection">
+    <div><h3 class="overlay-reflection-title">Learning in<br><em>loops.</em></h3></div>
+    <div><p class="overlay-reflection-body">Each piece is a small, self-contained test — a way to learn Blender one material or motion problem at a time. This page grows as the experiments pile up.</p></div>
   </div>
 </div>
 
@@ -2090,7 +2147,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img" style="background:#060d1a;">
       <div class="overlay-hero-img-inner">
-        <img src="cyanotype/IMG_9507.JPG" alt="Cyanotype print — hay que cambiar" style="object-fit:contain;">
+        <img loading="lazy" decoding="async" src="cyanotype/IMG_9507.JPG" alt="Cyanotype print — hay que cambiar" style="object-fit:contain;">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -2112,21 +2169,21 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Prints</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9507.JPG" alt="hay que cambiar"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9513.JPG" alt="You have so much power"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9500.JPG" alt="Flower oval"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9502.JPG" alt="Heart print"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9501.JPG" alt="Leaf botanical"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9503.JPG" alt="Oval with lace"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9506.JPG" alt="Prints overview"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9505%20(1).JPG" alt="Trying to be happy — layered"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9508.JPG" alt="Baroque portrait layered"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9507.JPG" alt="hay que cambiar"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9513.JPG" alt="You have so much power"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9500.JPG" alt="Flower oval"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9502.JPG" alt="Heart print"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9501.JPG" alt="Leaf botanical"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9503.JPG" alt="Oval with lace"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9506.JPG" alt="Prints overview"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9505%20(1).JPG" alt="Trying to be happy — layered"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9508.JPG" alt="Baroque portrait layered"></div>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">On Fabric</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9512.JPG" alt="White t-shirt with doily and jewelry"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9504.JPG" alt="Fabric print with lace and starfish"></div>
-      <div class="overlay-grid-item"><img src="cyanotype/IMG_9509.JPG" alt="Green t-shirt with butterfly and chains"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9512.JPG" alt="White t-shirt with doily and jewelry"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9504.JPG" alt="Fabric print with lace and starfish"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="cyanotype/IMG_9509.JPG" alt="Green t-shirt with butterfly and chains"></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -2146,7 +2203,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -2166,21 +2223,21 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">La Cuarta Estrella 2026</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella 2026"><span>La Cuarta Estrella · 2026</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/messi-streetmockup.png" alt="Messi poster — street mockup"><span>Street mockup</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/messi-finalized.jpg" alt="Messi — 2022"><span>World Cup 2022 · SCAD</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/MessiPrinted.jpg" alt="Messi — printed"><span>Printed</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella 2026"><span>La Cuarta Estrella · 2026</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/messi-streetmockup.jpg" alt="Messi poster — street mockup"><span>Street mockup</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/messi-finalized.jpg" alt="Messi — 2022"><span>World Cup 2022 · SCAD</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/MessiPrinted.jpg" alt="Messi — printed"><span>Printed</span></div>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Process · Cyanotype Prints</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="printsmessiforcyan.jpeg" alt="Cyanotype prints of the Messi poster"></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="printsmessiforcyan.jpeg" alt="Cyanotype prints of the Messi poster"></div>
     </div>
 
     <div class="overlay-gallery-title" style="margin-top:48px;">The Series</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Mbappe.jpg" alt="Mbappé"><span>Mbappé</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Ronaldo.jpg" alt="Ronaldo"><span>Ronaldo</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/IDOLSSERIES.jpg" alt="Idols series"><span>Idols series</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/Mbappe.jpg" alt="Mbappé"><span>Mbappé</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/Ronaldo.jpg" alt="Ronaldo"><span>Ronaldo</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/IDOLSSERIES.jpg" alt="Idols series"><span>Idols series</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -2201,7 +2258,7 @@ footer {
   </div>
   <div class="overlay-hero">
     <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img src="projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg" alt="Film poster"></div>
+      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg" alt="Film poster"></div>
       <div class="accent-bar"></div>
     </div>
     <div class="overlay-hero-content">
@@ -2220,49 +2277,39 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Parlez — Campaign</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><video autoplay muted loop playsinline><source src="projects/graphicsgallery/Parlezcommercial-web.mp4" type="video/mp4"></video></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/parlezad.jpg" alt=""><span>Parlez ad</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/phoneparez.png" alt=""><span>Parlez phone mockup</span></div>
+      <div class="overlay-grid-item"><video preload="none" autoplay muted loop playsinline><source src="projects/graphicsgallery/Parlezcommercial-web.mp4" type="video/mp4"></video></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/parlezad.jpg" alt=""><span>Parlez ad</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/phoneparez.png" alt=""><span>Parlez phone mockup</span></div>
     </div>
 
     <div class="overlay-gallery-title">Editorial &amp; Film</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg" alt=""><span>Film poster — This is not a Commercial</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/LiottaP_Project1Part3.jpg" alt=""><span>Editorial project</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/printfilmmm.jpg" alt=""><span>Print film</span></div>
-    </div>
-
-    <div class="overlay-gallery-title">Sports Poster Series</div>
-    <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/messi-finalized.jpg" alt="Messi poster"><span>Messi — final poster</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Messi%20Poster.jpg" alt=""><span>Messi — mockup</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Mbappe.jpg" alt=""><span>Mbappé</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Ronaldo.jpg" alt=""><span>Ronaldo</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/MessiPrinted.jpg" alt=""><span>Messi — printed</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/IDOLSSERIES.jpg" alt=""><span>Idols series</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/GRDS440_202530_PilarLiotta_Project2_Filmposter.jpg" alt=""><span>Film poster — This is not a Commercial</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/LiottaP_Project1Part3.jpg" alt=""><span>Editorial project</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/printfilmmm.jpg" alt=""><span>Print film</span></div>
     </div>
 
     <div class="overlay-gallery-title">Branding &amp; Identity</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/IRL%20STATION.jpg" alt=""><span>IRL Station</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/IRLSTATION2.jpg" alt=""><span>IRL Station 2</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/nametag.jpg" alt=""><span>Name tag</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/app.jpg" alt=""><span>App design</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/IRL%20STATION.jpg" alt=""><span>IRL Station</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/IRLSTATION2.jpg" alt=""><span>IRL Station 2</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/nametag.jpg" alt=""><span>Name tag</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/app.jpg" alt=""><span>App design</span></div>
     </div>
 
     <div class="overlay-gallery-title">Packaging</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/CeraVeBoxBluue.jpg" alt=""><span>CeraVe box</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/CeraVeMockupwgirl.jpg" alt=""><span>CeraVe mockup</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/Artboard%2042.jpg" alt="" style="object-fit:contain;"><span>Artboard 42</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/CeraVeBoxBluue.jpg" alt=""><span>CeraVe box</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/CeraVeMockupwgirl.jpg" alt=""><span>CeraVe mockup</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/Artboard%2042.jpg" alt="" style="object-fit:contain;"><span>Artboard 42</span></div>
     </div>
 
     <div class="overlay-gallery-title">Adidas</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/adida%20mockups%207.jpg" alt=""><span>Adidas mockups</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/adidasmockup3.jpg" alt=""><span>Adidas mockup 3</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/seminarmockup.jpeg" alt=""><span>Seminar mockup</span></div>
-      <div class="overlay-grid-item"><img src="projects/graphicsgallery/stickers.jpg" alt=""><span>Stickers</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/adida%20mockups%207.jpg" alt=""><span>Adidas mockups</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/adidasmockup3.jpg" alt=""><span>Adidas mockup 3</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/seminarmockup.jpeg" alt=""><span>Seminar mockup</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/stickers.jpg" alt=""><span>Stickers</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -2280,7 +2327,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/diesel/DieselMockup.webp" alt="Diesel magazine mockup">
+        <img loading="lazy" decoding="async" src="projects/diesel/DieselMockup.webp" alt="Diesel magazine mockup">
       </div>
     </div>
     <div class="overlay-hero-content">
@@ -2301,30 +2348,30 @@ footer {
   <div class="overlay-gallery">
     <div class="overlay-gallery-title">Campaign video</div>
     <div style="width:100%;margin-bottom:2px;">
-      <video autoplay muted loop playsinline style="width:100%;max-height:70vh;object-fit:cover;display:block;">
+      <video preload="none" autoplay muted loop playsinline style="width:100%;max-height:70vh;object-fit:cover;display:block;">
         <source src="projects/diesel/DieselFinaledited-web.mp4" type="video/mp4">
       </video>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Editorial spreads</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/diesel/frontback.jpg" alt=""><span>Front &amp; back</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/diesel121.webp" alt=""><span>Spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/DieselBW.webp" alt=""><span>B&amp;W spread</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Diesel+Magazine+girl+holding+.webp" alt=""><span>Editorial</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Dieselcollection.webp" alt=""><span>Collection</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/Unzip+the+look.webp" alt=""><span>Campaign</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/frontback.jpg" alt=""><span>Front &amp; back</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/diesel121.webp" alt=""><span>Spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/DieselBW.webp" alt=""><span>B&amp;W spread</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/Diesel+Magazine+girl+holding+.webp" alt=""><span>Editorial</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/Dieselcollection.webp" alt=""><span>Collection</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/Unzip+the+look.webp" alt=""><span>Campaign</span></div>
     </div>
     <div style="padding:32px 0 0;">
       <a href="projects/diesel/SAV_202420_GRDS348_PilarLiotta_Brand_Communications_Social_Media.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);text-decoration:none;padding:14px 20px;border:1px solid var(--border);transition:background 0.2s,border-color 0.2s;">View full PDF <span style="color:var(--accent);">→</span></a>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Mockups</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/diesel/DieselMockup.webp" alt=""><span>Magazine mockup</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/DieselMockup.webp" alt=""><span>Magazine mockup</span></div>
     </div>
     <div class="overlay-gallery-title" style="margin-top:48px;">Social</div>
     <div class="overlay-grid">
-      <div class="overlay-grid-item"><img src="projects/diesel/DieselInstagram.webp" alt=""><span>Instagram</span></div>
-      <div class="overlay-grid-item"><img src="projects/diesel/dieselinstaotherpart2.jpg" alt=""><span>Instagram 2</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/DieselInstagram.webp" alt=""><span>Instagram</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/diesel/dieselinstaotherpart2.jpg" alt=""><span>Instagram 2</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
@@ -2345,7 +2392,7 @@ footer {
   <div class="overlay-hero">
     <div class="overlay-hero-img">
       <div class="overlay-hero-img-inner">
-        <img src="projects/meme/memescreen1.png" alt="Meme Transmission — Chat Interface" style="object-fit:contain; background:#000;">
+        <img loading="lazy" decoding="async" src="projects/meme/memescreen1.png" alt="Meme Transmission — Chat Interface" style="object-fit:contain; background:#000;">
       </div>
       <div class="accent-bar"></div>
     </div>
@@ -2399,29 +2446,29 @@ footer {
 
     <div class="overlay-gallery-title">The 5 Memes &amp; Their Degradation</div>
     <div style="max-width:720px; margin-bottom:24px;">
-      <video src="projects/meme/recordingofmeme.mov" autoplay muted loop playsinline style="width:100%; border:1px solid var(--border); display:block;"></video>
+      <video preload="none" src="projects/meme/recordingofmeme.mp4" autoplay muted loop playsinline style="width:100%; border:1px solid var(--border); display:block;"></video>
       <div style="font-family:var(--mono); font-size:9px; color:var(--muted); margin-top:8px; text-transform:uppercase; letter-spacing:0.1em;">Interaction Recording · Stages of Decay</div>
     </div>
     <div style="max-width:720px; margin-bottom:64px;">
       <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:12px;">
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img src="projects/meme/thisisfine.jpg" alt="This Is Fine" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img loading="lazy" decoding="async" src="projects/meme/thisisfine.jpg" alt="This Is Fine" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <span style="font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">This Is Fine</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img src="projects/meme/pepe.jpg" alt="Pepe" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img loading="lazy" decoding="async" src="projects/meme/pepe.jpg" alt="Pepe" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <span style="font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Pepe</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img src="projects/meme/doge.jpg" alt="Doge" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img loading="lazy" decoding="async" src="projects/meme/doge.jpg" alt="Doge" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <span style="font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Doge</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img src="projects/meme/npc.jpg" alt="NPC" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img loading="lazy" decoding="async" src="projects/meme/npc.jpg" alt="NPC" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <span style="font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">NPC</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img src="projects/meme/crying.jpg" alt="Crying Wojak" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid var(--border);"><img loading="lazy" decoding="async" src="projects/meme/crying.jpg" alt="Crying Wojak" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <span style="font-family:var(--mono);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;">Crying Wojak</span>
         </div>
       </div>
@@ -2440,19 +2487,19 @@ footer {
       <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="aspect-ratio:4/3; border:1px solid var(--border); overflow:hidden;">
-            <iframe src="https://editor.p5js.org/pilarliotta/full/6P3tyH8IS" style="width:100%; height:100%; border:none;"></iframe>
+            <iframe loading="lazy" src="https://editor.p5js.org/pilarliotta/full/6P3tyH8IS" style="width:100%; height:100%; border:none;"></iframe>
           </div>
           <span style="font-family:var(--mono); font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">Emotional Regulation</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="aspect-ratio:4/3; border:1px solid var(--border); overflow:hidden;">
-            <iframe src="https://editor.p5js.org/pilarliotta/full/6nnsfXE_0" style="width:100%; height:100%; border:none;"></iframe>
+            <iframe loading="lazy" src="https://editor.p5js.org/pilarliotta/full/6nnsfXE_0" style="width:100%; height:100%; border:none;"></iframe>
           </div>
           <span style="font-family:var(--mono); font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">Doomscroll Cycle</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div style="aspect-ratio:4/3; border:1px solid var(--border); overflow:hidden;">
-            <iframe src="https://editor.p5js.org/pilarliotta/full/j61RqHygz" style="width:100%; height:100%; border:none;"></iframe>
+            <iframe loading="lazy" src="https://editor.p5js.org/pilarliotta/full/j61RqHygz" style="width:100%; height:100%; border:none;"></iframe>
           </div>
           <span style="font-family:var(--mono); font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">Support vs Enablement</span>
         </div>
@@ -2621,8 +2668,8 @@ const lbContent = document.getElementById('lightbox-content');
 
 function openLightbox(src, isVideo) {
   lbContent.innerHTML = isVideo 
-    ? `<video src="${src}" autoplay muted loop playsinline controls></video>`
-    : `<img src="${src}" alt="Enlarged view">`;
+    ? `<video preload="none" src="${src}" autoplay muted loop playsinline controls></video>`
+    : `<img loading="lazy" decoding="async" src="${src}" alt="Enlarged view">`;
   lb.classList.add('open');
 }
 
