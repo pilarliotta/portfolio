@@ -683,6 +683,17 @@ footer {
   object-fit: contain;
 }
 
+/* Diesel Spread + dress — portrait images, no crop */
+#overlay-diesel .overlay-grid-item:has(img[src="projects/diesel/diesel121.webp"]),
+#overlay-diesel .overlay-grid-item:has(img[src="projects/diesel/dieselinstaotherpart2.jpg"]) {
+  aspect-ratio: 3/4;
+  background: #111;
+}
+#overlay-diesel .overlay-grid-item:has(img[src="projects/diesel/diesel121.webp"]) img,
+#overlay-diesel .overlay-grid-item:has(img[src="projects/diesel/dieselinstaotherpart2.jpg"]) img {
+  object-fit: contain;
+}
+
 /* VSCO gallery — show full images, 4 columns, no crop */
 #overlay-vsco .overlay-grid {
   grid-template-columns: repeat(4, 1fr);
