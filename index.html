@@ -653,23 +653,6 @@ footer {
 .p-arrow.prev { left:12px; }
 .p-arrow.next { right:12px; }
 
-/* World Cup Series — mixed orientations, no crop, bars blend into page */
-#overlay-worldcup .overlay-grid-item {
-  aspect-ratio: 4/3;
-  background: var(--bg);
-  border: 1px solid var(--border);
-}
-#overlay-worldcup .overlay-grid-item:first-child {
-  grid-column: 1;
-  aspect-ratio: 4/3;
-}
-#overlay-worldcup .overlay-grid-item img {
-  object-fit: contain;
-}
-#overlay-worldcup .overlay-grid-item span {
-  color: var(--muted);
-}
-
 /* Cyanotype — portrait grid, no crop */
 #overlay-cyanotype .overlay-grid-item {
   aspect-ratio: 3/4;
@@ -1021,11 +1004,6 @@ footer {
       <div class="project-card-bg" style="background-image:url('projects/perception/perception_documentation_Page_12.png');"></div>
       <div class="project-card-overlay"></div>
       <div class="project-card-info"><div class="project-card-label">Installation · 2026</div><div class="project-card-name">Perception</div></div>
-    </div>
-    <div class="project-card" onclick="openOverlay('worldcup')">
-      <div class="project-card-bg" style="background-image:url('projects/graphicsgallery/final4messi.jpg');"></div>
-      <div class="project-card-overlay"></div>
-      <div class="project-card-info"><div class="project-card-label">Sports · World Cup · 2022 · 2026</div><div class="project-card-name">World Cup Series</div></div>
     </div>
     <div class="project-card" onclick="openOverlay('cyanotype')">
       <div class="project-card-bg" style="background-image:url('cyanotype/IMG_9513.JPG');background-size:cover;background-position:center;"></div>
@@ -2206,61 +2184,6 @@ footer {
   </div>
 </div>
 
-<!-- WORLD CUP SERIES -->
-<div class="project-overlay" id="overlay-worldcup" role="dialog" aria-modal="true">
-  <div class="overlay-nav">
-    <button class="overlay-back" onclick="closeOverlay('worldcup')">Back to work</button>
-    <span class="overlay-title-small">World Cup Series</span>
-  </div>
-  <div class="overlay-hero">
-    <div class="overlay-hero-img">
-      <div class="overlay-hero-img-inner"><img loading="lazy" decoding="async" src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella"></div>
-      <div class="accent-bar"></div>
-    </div>
-    <div class="overlay-hero-content">
-      <div>
-        <div class="overlay-eyebrow">Sports Poster Series · 2022 · 2026</div>
-        <h2 class="overlay-project-title">World Cup<br><em>Series</em></h2>
-        <p class="overlay-desc">Two Messi pieces, three years apart. The first — bold, modern, colorful — made in 2022 at SCAD, celebrating him lifting the World Cup. The second made in 2026: vintage, print-style texture inspired by cyanotype prints, orange and navy, the Sol de Mayo rising behind four stars. Messi faces away this time — not a finished story, a new journey.</p>
-      </div>
-      <div class="overlay-meta-grid">
-        <div><div class="overlay-meta-label">Role</div><div class="overlay-meta-val">Design, Art Direction</div></div>
-        <div><div class="overlay-meta-label">Years</div><div class="overlay-meta-val">2022 · 2026</div></div>
-        <div><div class="overlay-meta-label">Category</div><div class="overlay-meta-val">Poster, Sports</div></div>
-        <div><div class="overlay-meta-label">Context</div><div class="overlay-meta-val">SCAD · Personal</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="overlay-gallery">
-    <div class="overlay-gallery-title">La Cuarta Estrella 2026</div>
-    <div class="overlay-grid">
-      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella 2026"><span>La Cuarta Estrella · 2026</span></div>
-      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/messi-streetmockup.jpg" alt="Messi poster — street mockup"><span>Street mockup</span></div>
-      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/messi-finalized.jpg" alt="Messi — 2022"><span>World Cup 2022 · SCAD</span></div>
-      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/MessiPrinted.jpg" alt="Messi — printed"><span>Printed</span></div>
-    </div>
-    <div class="overlay-gallery-title" style="margin-top:48px;">Process · Cyanotype Prints</div>
-    <div class="overlay-grid">
-      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="printsmessiforcyan.jpeg" alt="Cyanotype prints of the Messi poster"></div>
-    </div>
-
-    <div class="overlay-gallery-title" style="margin-top:48px;">The Series</div>
-    <div class="overlay-grid">
-      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/Mbappe.jpg" alt="Mbappé"><span>Mbappé</span></div>
-      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/Ronaldo.jpg" alt="Ronaldo"><span>Ronaldo</span></div>
-      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/IDOLSSERIES.jpg" alt="Idols series"><span>Idols series</span></div>
-    </div>
-  </div>
-  <div class="overlay-reflection">
-    <div><h3 class="overlay-reflection-title">Identity,<br>legacy, and<br><em>grit.</em></h3></div>
-    <div>
-      <p class="overlay-reflection-body">If you've ever heard Argentine fans chant about the cuarta estrella shining on the camiseta, that's the energy behind this piece — and the dream of eventually turning this design into an actual shirt.</p>
-      <p class="overlay-reflection-body" style="margin-top:20px;">Argentina often gets reduced to simple narratives, but our identity has always been complex: immigration, Indigenous roots, resilience, and a culture with an impact that reaches far beyond our borders. South America has proven again and again that we belong on the world's biggest stages. In a world of social media and AI, images shape how we see athletes, countries, and cultures. Good designers have a responsibility to tell stories with purpose and grit.</p>
-      <p class="overlay-reflection-body" style="margin-top:20px;">🇦🇷 Aguante Argentina!</p>
-    </div>
-  </div>
-</div>
-
 <!-- SCAD MIXED GALLERY -->
 <div class="project-overlay" id="overlay-graphicdesign" role="dialog" aria-modal="true">
   <div class="overlay-nav">
@@ -2321,6 +2244,18 @@ footer {
       <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/adidasmockup3.jpg" alt=""><span>Adidas mockup 3</span></div>
       <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/seminarmockup.jpeg" alt=""><span>Seminar mockup</span></div>
       <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/stickers.jpg" alt=""><span>Stickers</span></div>
+    </div>
+
+    <div class="overlay-gallery-title">World Cup Series</div>
+    <div class="overlay-grid">
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/final4messi.jpg" alt="Messi — La Cuarta Estrella 2026" style="object-fit:contain;"><span>La Cuarta Estrella · 2026</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/messi-streetmockup.jpg" alt="Messi poster — street mockup" style="object-fit:contain;"><span>Street mockup</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/messi-finalized.jpg" alt="Messi — 2022" style="object-fit:contain;"><span>World Cup 2022</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/MessiPrinted.jpg" alt="Messi — printed" style="object-fit:contain;"><span>Printed</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="printsmessiforcyan.jpeg" alt="Cyanotype prints of the Messi poster" style="object-fit:contain;"><span>Cyanotype process</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/Mbappe.jpg" alt="Mbappé" style="object-fit:contain;"><span>Mbappé</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/Ronaldo.jpg" alt="Ronaldo" style="object-fit:contain;"><span>Ronaldo</span></div>
+      <div class="overlay-grid-item"><img loading="lazy" decoding="async" src="projects/graphicsgallery/IDOLSSERIES.jpg" alt="Idols series" style="object-fit:contain;"><span>Idols series</span></div>
     </div>
   </div>
   <div class="overlay-reflection">
